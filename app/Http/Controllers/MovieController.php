@@ -10,4 +10,9 @@ class MovieController extends Controller
     {
         return view('index');
     }
+
+    public function create()
+    {
+        return view('layouts.login');
+    }
 }

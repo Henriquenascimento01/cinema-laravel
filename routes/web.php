@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MovieController::class, 'index']);
+Route::get('/', [MovieController::class, 'index'])->name('index');
+Route::get('/movies/create', [MovieController::class, 'create'])->name('create');
 
 
 // Autentication
-// Route::get('/', [UserController::class, 'login'])->name('login.page');
-// Route::post('/auth', [UserController::class, 'auth'])->name('auth.user')->middleware('auth');
+
+Route::post('/auth', [UserController::class, 'logIn'])->name('auth');

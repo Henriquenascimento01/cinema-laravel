@@ -17,14 +17,14 @@
             <div class="col-auto">
                 <div class="container ">
                     <div class="form-group">
-                        <img src="./img/Logozoeira.png" width="500px" alt="Logo">
+                        <img src="/img/Logozoeira.png" width="500px" alt="Logo">
                     </div>
                     @if(session('danger'))
                     <div class="alert alert-danger">
                         {{session('danger')}}
                     </div>
                     @endif
-                    <form method="post" action="{{route('auth.user')}}">
+                    <form method="POST" action="{{route('auth')}}">
                         @csrf
                         <div class="form-group">
                             @if ($errors->any())

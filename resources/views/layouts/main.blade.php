@@ -27,10 +27,10 @@
                 </a>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="/" class="nav-link">Inicio</a>
+                        <a href="{{route('index')}}" class="nav-link">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/" class="nav-link">Cadastrar filme</a>
+                        <a href="{{route('create')}}" class="nav-link">Cadastrar filme</a>
                     </li>
                     <li class="nav-item">
                         <a href="/" class="nav-link">Sair</a>
@@ -42,6 +42,9 @@
     @yield('content')
     <footer>
         <p>Cinema&copy; 2022</p>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
     </footer>
 </body>
 
