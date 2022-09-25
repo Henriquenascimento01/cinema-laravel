@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MovieController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [MovieController::class, 'index']);
+
 
 // Autentication
-Route::get('/', [UserController::class, 'login'])->name('login.page');
-Route::post('/auth', [UserController::class, 'auth'])->name('auth.user')->middleware('auth'); 
+// Route::get('/', [UserController::class, 'login'])->name('login.page');
+// Route::post('/auth', [UserController::class, 'auth'])->name('auth.user')->middleware('auth');

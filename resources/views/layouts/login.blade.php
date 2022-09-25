@@ -26,7 +26,6 @@
                     @endif
                     <form method="post" action="{{route('auth.user')}}">
                         @csrf
-
                         <div class="form-group">
                             @if ($errors->any())
                             <div class="alert alert-danger">
