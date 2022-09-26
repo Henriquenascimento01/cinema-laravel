@@ -80,11 +80,14 @@ header {
 
 #movie-container h2 {
     margin-bottom: 10px;
+    text-align: center;
+
 }
 
 #movie-container .subtitle {
     color: #757575;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 #movie-container .card {
