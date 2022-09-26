@@ -27,19 +27,25 @@
                 </a>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="{{route('index')}}" class="nav-link">Inicio</a>
+                        <a href="/" class="nav-link">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('create')}}" class="nav-link">Cadastrar filme</a>
+                        <a href="/" class="nav-link">Cadastrar filme</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/" class="nav-link">Sair</a>
+                        <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">Sair</a>
                     </li>
                 </ul>
+
+                <form id="logout-form" method="POST" action="{{ route('logout') }}" class="d-none">
+                    @csrf
+                </form>
             </div>
         </nav>
     </header>
     @yield('content')
+
     <footer>
         <p>Cinema &copy; 2022</p>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

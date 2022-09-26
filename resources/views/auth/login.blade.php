@@ -24,7 +24,7 @@
                         {{session('danger')}}
                     </div>
                     @endif
-                    <form method="POST" action="{{route('auth')}}">
+                    <form method="POST" action="{{route('login')}}">
                         @csrf
                         <div class="form-group">
                             @if ($errors->any())

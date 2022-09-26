@@ -16,11 +16,20 @@ class Movie extends Model
         "tag"
     ];
 
-    public function sessions(){
+    public function sessions()
+    {
         return $this->hasMany(Session::class);
     }
 
-    public function index(){
-        
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function createMovie()
+    {
+        $movie = Movie::create(['name' => 'Inovocação']);
+
+        return $movie->sessions()->get();
     }
 }
