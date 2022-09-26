@@ -16,3 +16,4 @@ class MovieController extends Controller
         return view('layouts.login');
     }
 }
+ 
