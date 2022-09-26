@@ -19,6 +19,6 @@ Route::get('/', [MovieController::class, 'index'])->name('index');
 Route::get('/movies/create', [MovieController::class, 'create'])->name('create');
 
 
-// Autentication
 
+// Autentication
 Route::post('/auth', [UserController::class, 'logIn'])->name('auth');
