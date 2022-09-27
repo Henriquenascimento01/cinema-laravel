@@ -30,7 +30,10 @@
                         <a href="/" class="nav-link">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/" class="nav-link">Cadastrar filme</a>
+                        <a href="{{ route('movies-create')}}" class="nav-link">Cadastrar filme</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('rooms-create') }}" class="nav-link">Criar sala</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();

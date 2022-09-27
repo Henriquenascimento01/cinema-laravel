@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,7 @@ class Movie extends Model
         "name",
         "description",
         "image",
-        "tag"
+
     ];
 
     public function sessions()
@@ -26,10 +27,4 @@ class Movie extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function createMovie()
-    {
-        $movie = Movie::create(['name' => 'Inovocação']);
-
-        return $movie->sessions()->get();
-    }
 }

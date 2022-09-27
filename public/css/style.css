@@ -116,10 +116,34 @@ header {
     margin-bottom: 30px;
 }
 
+.card-id {
+    font-size: 10px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
 .card-duration {
     font-size: 20px;
 
 }
+
+/* Página de cadastro */
+
+#movie-create-container {
+    padding: 35px;
+    font-weight: bold;
+}
+
+#movie-create-container label {
+    font-weight: bold;
+}
+
+#movie-create-container input,
+#movie-create-container select,
+#movie-create-container textarea {
+    font-size: 20px;
+}
+
 
 /* Rodapé */
 

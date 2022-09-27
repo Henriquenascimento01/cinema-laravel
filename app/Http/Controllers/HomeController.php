@@ -3,18 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Movie;
 class HomeController extends Controller
 {
-    // public function homePage(){
-        
-
-    //     return view ('home'); 
-    // }
-
-    public function __invoke(Request $request)
+    public function index()
     {
-        $user = auth()->user();
-        return view('home'); 
+        $movies = Movie::all();
+
+        return view('movies.index', ['movies' => $movies]);
     }
 }
