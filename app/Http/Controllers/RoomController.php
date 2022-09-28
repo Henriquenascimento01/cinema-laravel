@@ -31,4 +31,22 @@ class RoomController extends Controller
 
         return redirect('/');
     }
+
+    public function edit($id)
+    {
+        $rooms = Room::where('id', $id)->first();
+
+        if (!empty($rooms)) {
+            return view('rooms.edit', ['rooms' => $rooms]);
+        } else {
+            return redirect()->route('index');
+        }
+    }
+
+    public function destroy($id)
+    {
+        Room::where('id', $id)->delete();
+
+        return redirect()->route('rooms-index');
+    }
 }

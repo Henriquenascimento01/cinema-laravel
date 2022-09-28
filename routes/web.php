@@ -40,6 +40,9 @@ Route::prefix('rooms')->group(function () {
     Route::get('/', [RoomController::class, 'index'])->name('rooms-index');
     Route::get('/create', [RoomController::class, 'create'])->name('rooms-create');
     Route::post('/', [RoomController::class, 'store'])->name('rooms-store');
+    Route::get('/{id}/edit', [RoomController::class, 'edit'])->where('id', '[0-9]+')->name('rooms-edit');
+    Route::delete('/{id}', [RoomController::class, 'destroy'])->where('id', '[0-9]+')->name('rooms-destroy');
+
 });
 
 Route::prefix('/sessions')->group(function () {
