@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name')->default('null');
             $table->string('description')->default('null');
             $table->string('image')->default('null');
+
         });
     }
 

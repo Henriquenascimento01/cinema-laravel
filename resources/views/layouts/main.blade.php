@@ -31,13 +31,13 @@
                         <a href="/" class="nav-link">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('movies-index' )}}" class="nav-link">Filmes</a>
+                        <a href="{{ route('movies-index') }}" class="nav-link">Filmes</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('rooms-index' )}}" class="nav-link">Salas</a>
+                        <a href="{{ route('rooms-index') }}" class="nav-link">Salas</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('sessions-create')}}" class="nav-link">Criar sessão</a>
+                        <a href="{{ route('sessions-create') }}" class="nav-link">Criar sessão</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('movies-create') }}" class="nav-link">Cadastrar filme</a>
@@ -58,7 +58,18 @@
             </div>
         </nav>
     </header>
-    @yield('content')
+    <main>
+        <div class="container-fluid">
+            <div class="mt-5">
+                @if (session('msg'))
+                    <div class="alert alert-success" role="alert">
+                        <p class="msg">{{ session('msg') }}</p>
+                    </div>
+                @endif
+                @yield('content')
+            </div>
+        </div>
+    </main>
 
     <footer>
         <p>Cinema &copy; 2022</p>

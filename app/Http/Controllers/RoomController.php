@@ -10,7 +10,7 @@ class RoomController extends Controller
 
     public function index()
     {
-        $rooms = Room::all();
+        $rooms = Room::getAll();
 
         return view('rooms.index', ['rooms' => $rooms]);
     }
@@ -23,24 +23,31 @@ class RoomController extends Controller
 
     public function store(Request $request)
     {
-        $rooms = new Room;
+        $return = Room::store($request);
 
-        $rooms->number = $request->number;
-
-        $rooms->save();
-
-        return redirect('/');
+        if ($return == true) {
+            return redirect('/')->with('msg', 'Sala alterada com sucesso');
+        } else return back()->withErrors('msg', $return);
     }
 
     public function edit($id)
     {
-        $rooms = Room::where('id', $id)->first();
+        $room = Room::where('id', $id)->get();
 
-        if (!empty($rooms)) {
-            return view('rooms.edit', ['rooms' => $rooms]);
+        if (!empty($room)) {
+            return view('rooms.edit', ['room' => $room]);
         } else {
             return redirect()->route('index');
         }
+    }
+
+    public function update(Request $request, $number)
+    {   
+        //dd($request);
+        Room::alter($number, $request);
+
+
+        return redirect()->route('index');
     }
 
     public function destroy($id)

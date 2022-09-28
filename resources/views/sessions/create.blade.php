@@ -8,6 +8,9 @@
 
     <div id="movie-create-container" class="col-md-6 offset-md-3">
         <h1>Cadastrar sessão</h1>
+        @error('msg')
+            
+        @enderror
         <form action="{{ route('sessions-store') }}" method="POST">
             @csrf
             <div class="form-group">

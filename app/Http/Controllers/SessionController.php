@@ -13,6 +13,7 @@ class SessionController extends Controller
 
     public function create()
     {
+
         $movies = Movie::all();
         $rooms = Room::all();
 
@@ -24,16 +25,11 @@ class SessionController extends Controller
 
     public function store(Request $request)
     {
-        $sessions = new Session;
+        $return = Session::store($request);
 
-        $sessions->date = $request->date;
-        $sessions->time = $request->time;
-        $sessions->room_id = $request->room_id;
-        $sessions->movie_id = $request->movie_id;
-
-        $sessions->save();
-
-        return redirect('/');
+        if ($return == true) {
+            return redirect('/')->with('msg', 'Sessão criada com sucesso!');
+        } else return back()->withErrors('msg', $return);
     }
 
 
@@ -61,15 +57,7 @@ class SessionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = [
-            'date' => $request->date,
-            'time' => $request->time,
-            'movie_id' => $request->movie_id,
-            'room_id' => $request->room_id
-            
-        ];
-
-        Session::where('id', $id)->update($data);
+        Session::alter($id, $request);
 
         return redirect()->route('index');
     }

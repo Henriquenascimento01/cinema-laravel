@@ -13,7 +13,6 @@
                 <th scope="col">Número</th>
             </tr>
         </thead>
-
         <tbody>
             @foreach ($rooms as $room)
                 <tr>
