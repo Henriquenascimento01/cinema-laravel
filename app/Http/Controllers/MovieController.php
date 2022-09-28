@@ -9,6 +9,15 @@ use App\Models\Room;
 
 class MovieController extends Controller
 {
+    public function index()
+    {
+
+        $movies = Movie::all();
+
+        return view('movies.index', ['movies' => $movies]);
+    }
+
+
 
     public function create()
     {
@@ -18,14 +27,16 @@ class MovieController extends Controller
     public function store(Request $request)
     {
 
-        $movie = new Movie;
+        $movies = new Movie;
 
-        $movie->name = $request->name;
-        $movie->description = $request->description;
+        $movies->name = $request->name;
+        $movies->description = $request->description;
 
-        $movie->save();
+        $movies->save();
 
-        return redirect('/');
+        //return view('movies.index');
+
+        return redirect('/movies');
     }
 
     public function edit($id)
@@ -56,6 +67,6 @@ class MovieController extends Controller
     {
         Movie::where('id', $id)->delete();
 
-        return redirect()->route('index');
+        return redirect()->route('movies-index');
     }
 }

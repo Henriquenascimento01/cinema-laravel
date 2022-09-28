@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::prefix('movies')->group(function () {
+    Route::get('/', [MovieController::class, 'index'])->name('movies-index');
     Route::get('/{id}/edit', [MovieController::class, 'edit'])->where('id', '[0-9]+')->name('movies-edit');
     Route::get('/create', [MovieController::class, 'create'])->name('movies-create');
     Route::post('/', [MovieController::class, 'store'])->name('movies-store');

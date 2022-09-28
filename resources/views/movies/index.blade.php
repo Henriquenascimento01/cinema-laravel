@@ -1,41 +1,42 @@
 @extends('layouts.main')
 
 
-@section('title', 'Cinema')
+@section('title', 'Salas disponiveis')
+
 
 @section('content')
 
 
-    <div id="search-container" class="col md-12">
-        <h1>Busque por um filme</h1>
-        <form action="">
-            <input type="text" id="search" name="search" class="form-control" placeholder="Buscar filme">
-        </form>
-    </div>
-    <div id="movie-container" class="col md-12">
-        <h2>Proximos Sessões</h2>
-        <p class="subtitle">Veja as sessões dos proximos dias</p>
-
-        <div id="cards-container" class="row">
-            @foreach ($sessions as $session)
-                <div class="col md-4">
-                    <img src="/img/Logozoeira.png" alt="">
-                    <div class="card-body">
-                        <p class="card-date">{{ $session->date }}</p>
-                        <h5 class="card-title">{{ $session->movie->name }}</h5>
-                        <p class="card-duration">{{ $session->time }}</p>
-                        <a href="" class="btn btn-info">Mais informações</a>
-                        <a href="{{ route('sessions-edit', ['id' => $session->id]) }}" class="btn btn-warning">Editar</a>
-                        <form action="{{ route('sessions-destroy', ['id' => $session->id]) }}" method="POST"
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Genero</th>
+                <th scope="col">Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($movies as $movie)
+                <tr>
+                    <th scope="row">{{ $movie->id }}</th>
+                    <td>{{ $movie->name }}</td>
+                    <td>Teste</td>
+                    <td>{{ $movie->description }}</td>
+                    <td>
+                        <a href="{{ route('movies-edit', ['id' => $movie->id]) }}" class="btn btn-warning">Editar</a>
+                        <form action="{{ route('movies-destroy', ['id' => $movie->id]) }}" method="POST"
                             class="form-group">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger mt-2">Apagar</button>
                         </form>
-                    </div>
-                </div>
+                    </td>
+
+                </tr>
             @endforeach
-        </div>
-    </div>
+        </tbody>
+    </table>
+
 
 @endsection
