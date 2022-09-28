@@ -21,6 +21,7 @@
                     <option selected="disabled" value="Selecione"></option>
                     <option value="acao">Ação</option>
                     <option value="comedia">Comédia</option>
+                    <option value="comedia">Desenho</option>
                     <option value="drama">Drama</option>
                     <option value="romance">Romance</option>
                     <option value="documentario">Documentário</option>
@@ -29,25 +30,8 @@
                     <option value="ficcao">Ficção científica</option>
                 </select>
             </div>
-            <div>
 
-                <label for="tag">Salas disponíveis:</label>
-                <select name="room" id="room" class="form-control">
-                    <option value="room">Número da sala</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="date">Data:</label>
-                <input type="date" class="form-control" id="date" name="date" placeholder="Data de transmissão">
-            </div>
-            <div class="form-group">
-                <label for="time">Horário:</label>
-                <input type="time" class="form-control" id="time" name="time"
-                    placeholder="Horário de transmissão">
-            </div>
-
-            <div class="form-group">
+            <div class="form-group mt-5">
                 <label for="number">Descrição:</label>
                 <textarea name="description" id="description" cols="10" rows="5" class="form-control"></textarea>
             </div>

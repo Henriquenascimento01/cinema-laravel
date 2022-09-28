@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
 
     <!-- CSS Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <!-- CSS/JavaScript da aplicação -->
     <link rel="stylesheet" href="/css/style.css">
@@ -30,13 +31,17 @@
                         <a href="/" class="nav-link">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('movies-create')}}" class="nav-link">Cadastrar filme</a>
+                        <a href="{{ route('sessions-create')}}" class="nav-link">Criar sessão</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('movies-create') }}" class="nav-link">Cadastrar filme</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('rooms-create') }}" class="nav-link">Criar sala</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
+                        <a href="{{ route('logout') }}" class="nav-link"
+                            onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">Sair</a>
                     </li>
                 </ul>

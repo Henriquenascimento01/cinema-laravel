@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Authenticate;
 use GuzzleHttp\Middleware;
@@ -32,14 +33,23 @@ Route::prefix('movies')->group(function () {
     Route::post('/', [MovieController::class, 'store'])->name('movies-store');
     Route::put('/{id}', [MovieController::class, 'update'])->name('movies-update');
     Route::delete('/{id}', [MovieController::class, 'destroy'])->where('id', '[0-9]+')->name('movies-destroy');
-    
-    
 });
 
 Route::prefix('rooms')->group(function () {
+    Route::get('/', [RoomController::class, 'index'])->name('rooms-index');
     Route::get('/create', [RoomController::class, 'create'])->name('rooms-create');
     Route::post('/', [RoomController::class, 'store'])->name('rooms-store');
 });
+
+Route::prefix('/sessions')->group(function () {
+    Route::get('/create', [SessionController::class, 'create'])->name('sessions-create');
+    Route::post('/', [SessionController::class, 'store'])->name('sessions-store');
+    Route::get('/edit/{id}', [SessionController::class, 'edit'])->where('id', '[0-9]+')->name('sessions-edit');
+    Route::put('/{id}', [SessionController::class, 'update'])->name('sessions-update');
+    Route::delete('/{id}', [SessionController::class, 'destroy'])->where('id', '[0-9]+')->name('sessions-destroy');
+});
+
+
 
 // Autentication
 Route::get('/login', [AuthenticationController::class, 'login'])->name('login.form');

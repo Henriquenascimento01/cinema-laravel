@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use App\Models\Session;
+
 class HomeController extends Controller
 {
     public function index()
     {
-        $movies = Movie::all();
+        $sessions = Session::all();
 
-        return view('movies.index', ['movies' => $movies]);
+        return view('movies.index', ['sessions' => $sessions]);
     }
 }

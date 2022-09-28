@@ -10,10 +10,10 @@ class Session extends Model
     use HasFactory;
 
     protected $fillable = [
-        'movie_id',
-        'room_id',
         'date',
-        'time'
+        'time',
+        'movie_id',
+        'room_id'
     ];
 
     public function movie()

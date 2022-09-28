@@ -12,9 +12,8 @@ class RoomController extends Controller
     {
         $rooms = Room::all();
 
-        return view('movies.index', ['rooms' => $rooms]);
+        return view('rooms.index', ['rooms' => $rooms]);
     }
-
 
     public function create()
     {
