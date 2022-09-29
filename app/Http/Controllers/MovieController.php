@@ -12,11 +12,10 @@ class MovieController extends Controller
     public function index()
     {
 
-        $movies = Movie::all();
+        $movies = Movie::geAll();
 
         return view('movies.index', ['movies' => $movies]);
     }
-
 
 
     public function create()
@@ -65,7 +64,7 @@ class MovieController extends Controller
 
     public function destroy($id)
     {
-        Movie::where('id', $id)->delete();
+        Movie::destroy($id);
 
         return redirect()->route('movies-index');
     }

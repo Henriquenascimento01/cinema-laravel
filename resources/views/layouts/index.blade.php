@@ -13,7 +13,7 @@
         </form>
     </div>
     <div id="movie-container" class="col md-12">
-        <h2>Proximos Sessões</h2>
+        <h2>Proximas Sessões</h2>
         <p class="subtitle">Veja as sessões dos proximos dias</p>
 
         <div id="cards-container" class="row">
@@ -23,7 +23,8 @@
                     <div class="card-body">
                         <p class="card-date">{{ $session->date }}</p>
                         <h5 class="card-title">{{ $session->movie->name }}</h5>
-                        <p class="card-duration">{{ $session->time }}</p>
+                        <p class="card-duration">Inicio: {{ $session->time_initial }}</p>
+                        <p class="card-duration">Término: {{ $session->time_finish }}</p>
                         <a href="" class="btn btn-info">Mais informações</a>
                         <a href="{{ route('sessions-edit', ['id' => $session->id]) }}" class="btn btn-warning">Editar</a>
                         <form action="{{ route('sessions-destroy', ['id' => $session->id]) }}" method="POST"

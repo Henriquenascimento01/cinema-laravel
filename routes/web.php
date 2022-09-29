@@ -43,7 +43,6 @@ Route::prefix('rooms')->group(function () {
     Route::put('/{id}', [RoomController::class, 'update'])->name('rooms-update');
     Route::get('/{id}/edit', [RoomController::class, 'edit'])->where('id', '[0-9]+')->name('rooms-edit');
     Route::delete('/{id}', [RoomController::class, 'destroy'])->where('id', '[0-9]+')->name('rooms-destroy');
-
 });
 
 Route::prefix('/sessions')->group(function () {
@@ -53,7 +52,6 @@ Route::prefix('/sessions')->group(function () {
     Route::put('/{id}', [SessionController::class, 'update'])->name('sessions-update');
     Route::delete('/{id}', [SessionController::class, 'destroy'])->where('id', '[0-9]+')->name('sessions-destroy');
 });
-
 
 
 // Autentication

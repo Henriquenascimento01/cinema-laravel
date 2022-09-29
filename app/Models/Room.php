@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+
+use App\Services\RoomsValidate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+
 
 class Room extends Model
 {
@@ -19,6 +22,10 @@ class Room extends Model
         return $this->hasMany(Session::class);
     }
 
+
+
+    // Consultas no banco 
+
     public static function getAll()
     {
         return Room::all();
@@ -26,24 +33,30 @@ class Room extends Model
 
     public static function store(Request $request)
     {
-        try {
-            $rooms = new Room;
+        // if (RoomsValidate::usedRoom($request)) {
+        //     return back()->withErrors('Error');
+        // }
+        $rooms = new Room;
 
-            $rooms->number = $request->number;
+        $rooms->number = $request->number;
 
-            $rooms->save();
-        } catch (\PDOException $e) {
-            return $e->getMessage();
-        }
+        $rooms->save();
     }
 
-    public static function alter($number, Request $request)
+    public static function destroy($id)
     {
-        
-        $data = [
-            'number' => $request->number
-        ];
 
-        Room::where('number', $number)->update($data);
+        $movie = Room::findOrFail($id);
+
+        if (!$movie->sessions()->get()->isEmpty()) {
+            return back()->withErrors(['Sala vinculada à uma sessão']);
+        }
+
+        try {
+
+            $movie->delete();
+        } catch (\PDOException) {
+            return back()->withErrors('msg', 'Sala vinculada à uma sessão');
+        }
     }
 }

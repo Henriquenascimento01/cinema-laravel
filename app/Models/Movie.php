@@ -27,4 +27,29 @@ class Movie extends Model
         return $this->belongsTo(Tag::class);
     }
 
+    public static function geAll()
+    {
+        return Movie::all();
+    }
+
+    // public static function alter(){
+
+    // }
+
+    public static function destroy($id)
+    {
+
+        $room = Movie::findOrFail($id);
+
+        if (!$room->sessions()->get()->isEmpty()) {
+            return back()->withErrors(['Sala vinculada à uma sessão']);
+        }
+
+        try {
+
+            $room->delete();
+        } catch (\PDOException) {
+            return back()->withErrors('Sala vinculada à uma sessão');
+        }
+    }
 }

@@ -23,36 +23,46 @@ class RoomController extends Controller
 
     public function store(Request $request)
     {
-        $return = Room::store($request);
+        try {
+            Room::store($request);
 
-        if ($return == true) {
-            return redirect('/')->with('msg', 'Sala alterada com sucesso');
-        } else return back()->withErrors('msg', $return);
+            return redirect('/rooms');
+        } catch (\PDOException) {
+
+            return back()->withErrors('Sala já existente');
+        }
     }
 
     public function edit($id)
     {
-        $room = Room::where('id', $id)->get();
+        $rooms = Room::where('id', $id)->first();
 
-        if (!empty($room)) {
-            return view('rooms.edit', ['room' => $room]);
+        if (!empty($rooms)) {
+
+
+            return view('rooms.edit', ['rooms' => $rooms]);
         } else {
+
             return redirect()->route('index');
         }
     }
 
-    public function update(Request $request, $number)
-    {   
+    public function update(Request $request, $id)
+    {
         //dd($request);
-        Room::alter($number, $request);
 
+        $data = [
+            'number' => $request->number
+        ];
 
-        return redirect()->route('index');
+        Room::where('id', $id)->update($data);
+
+        return redirect()->route('rooms-index');
     }
 
     public function destroy($id)
     {
-        Room::where('id', $id)->delete();
+        Room::destroy($id);
 
         return redirect()->route('rooms-index');
     }

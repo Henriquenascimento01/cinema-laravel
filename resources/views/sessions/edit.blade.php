@@ -16,8 +16,13 @@
                 <input type="date" class="form-control" id="date" name="date" value="{{ $sessions->date }}">
             </div>
             <div class="form-group">
-                <label for="time">Horário:</label>
-                <input type="time" class="form-control" id="time" name="time" value="{{ $sessions->time }}">
+                <label for="time">Horário inicio:</label>
+                <input type="time" class="form-control" id="time" name="time"
+                    value="{{ $sessions->time_initial }}">
+            </div>
+            <div class="form-group">
+                <label for="time">Horário termino:</label>
+                <input type="time" class="form-control" id="time" name="time" value="{{ $sessions->finish }}">
             </div>
 
             <div class="form-group">
@@ -26,7 +31,7 @@
                     <option value="room_id">Selecione</option>
                     @foreach ($rooms as $room)
                         <option @if ($sessions->room_id == $room->id) selected @endif name="room_id"
-                            value="{{ $sessions->room_id }}">{{ $sessions->room->number }}</option>
+                            value="{{ $sessions->room_number }}">{{ $sessions->room->number }}</option>
                     @endforeach
                 </select>
             </div>
@@ -37,7 +42,7 @@
                     <option value="movie_id">Selecione</option>
                     @foreach ($movies as $movie)
                         <option @if ($sessions->movie_id == $movie->id) selected @endif name="movie_id"
-                            value="{{ $sessions->movie_id }}">{{ $sessions->movie->name }}</option>
+                            value="{{ $sessions->movie_name }}">{{ $sessions->movie->name }}</option>
                     @endforeach
                 </select>
 

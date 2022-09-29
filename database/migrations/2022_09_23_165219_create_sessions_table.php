@@ -18,8 +18,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->date('date');
-            $table->time('time');
-            
+            $table->time('time_initial');
+            $table->time('time_finish');
+
             $table->unsignedBigInteger('movie_id');
             $table->foreign('movie_id')->references('id')->on('movies');
 

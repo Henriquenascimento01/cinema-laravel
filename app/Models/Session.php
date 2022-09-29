@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use App\Services\ValideCineClosed;
+use DateTime;
+use DateTimeZone;
 
 class Session extends Model
 {
@@ -29,21 +32,33 @@ class Session extends Model
 
     public static function store(Request $request)
     {
+        // dd($request);
+        $hourOpening = date("Y-m-d 10:00");
+        $hourClosed  = date("Y-m-d 23:00");
 
-        try {
-            $sessions = new Session;
+        $session = new DateTime($request->date . $request->time_initial, new DateTimeZone('America/Sao_Paulo'));
 
-            $sessions->date = $request->date;
-            $sessions->time = $request->time;
-            $sessions->room_id = $request->room_id;
-            $sessions->movie_id = $request->movie_id;
+        if ($session < $hourOpening || $session > $hourClosed) {
+            return back()->withErrors('error');
+        } else {
 
-            $sessions->save();
 
-            return true;
-        } catch (\PDOException $e) {
+            try {
+                $sessions = new Session;
 
-            return $e->getMessage();
+                $sessions->date = $request->date;
+                $sessions->time_initial = $request->time_initial;
+                $sessions->time_finish = $request->time_finish;
+                $sessions->room_id = $request->room_id;
+                $sessions->movie_id = $request->movie_id;
+
+                $sessions->save();
+
+                return true;
+            } catch (\PDOException $e) {
+
+                return $e->getMessage();
+            }
         }
     }
 
@@ -60,5 +75,10 @@ class Session extends Model
         Session::where('id', $id)->update($data);
     }
 
-    
+    public static function getSessionsWithMovies()
+    {
+        return Session::with('movie', 'room')
+            ->orderBy('date')->orderBy('time')
+            ->get();
+    }
 }

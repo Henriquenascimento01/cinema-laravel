@@ -9,7 +9,6 @@
     <div id="movie-create-container" class="col-md-6 offset-md-3">
         <h1>Cadastrar sessão</h1>
         @error('msg')
-            
         @enderror
         <form action="{{ route('sessions-store') }}" method="POST">
             @csrf
@@ -18,8 +17,13 @@
                 <input type="date" class="form-control" id="date" name="date" placeholder="Data de transmissão">
             </div>
             <div class="form-group">
-                <label for="time">Horário:</label>
-                <input type="time" class="form-control" id="time" name="time"
+                <label for="time">Horário inicio:</label>
+                <input type="time" class="form-control" id="time_initial" name="time_initial"
+                    placeholder="Horário de transmissão">
+            </div>
+            <div class="form-group">
+                <label for="time">Horário termino:</label>
+                <input type="time" class="form-control" id="time_finish" name="time_finish"
                     placeholder="Horário de transmissão">
             </div>
 
