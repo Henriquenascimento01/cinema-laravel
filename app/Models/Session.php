@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Services\ValideCineClosed;
-use DateTime;
-use DateTimeZone;
+use App\Services\RoomsValidate;
+use App\Services\ValidatePastSessionDate;
+use App\Http\Requests\ValidateFormSessionCreate;
 
 class Session extends Model
 {
@@ -15,9 +16,11 @@ class Session extends Model
 
     protected $fillable = [
         'date',
-        'time',
+        'time_initial',
+        'time_finish',
         'movie_id',
         'room_id'
+
     ];
 
     public function movie()
@@ -30,37 +33,38 @@ class Session extends Model
         return $this->belongsTo(Room::class);
     }
 
-    public static function store(Request $request)
+
+
+    public static function store(ValidateFormSessionCreate $request)
     {
-        // dd($request);
-        $hourOpening = date("Y-m-d 10:00");
-        $hourClosed  = date("Y-m-d 23:00");
+        $request->validated();
 
-        $session = new DateTime($request->date . $request->time_initial, new DateTimeZone('America/Sao_Paulo'));
-
-        if ($session < $hourOpening || $session > $hourClosed) {
-            return back()->withErrors('error');
-        } else {
-
-
-            try {
-                $sessions = new Session;
-
-                $sessions->date = $request->date;
-                $sessions->time_initial = $request->time_initial;
-                $sessions->time_finish = $request->time_finish;
-                $sessions->room_id = $request->room_id;
-                $sessions->movie_id = $request->movie_id;
-
-                $sessions->save();
-
-                return true;
-            } catch (\PDOException $e) {
-
-                return $e->getMessage();
-            }
+        if (ValideCineClosed::cineClosed($request)) {
+            return back()->with('msg ', 'Cinema fechado');
         }
+
+        if (ValidatePastSessionDate::pastDate($request)) {
+
+            return back()->withErrors('Data invalida');
+        }
+
+        if (RoomsValidate::usedRoom($request)) {
+            return back()->withErrors('Data invalida');
+        }
+
+
+
+        $sessions = new Session;
+
+        $sessions->date = $request->date;
+        $sessions->time_initial = $request->time_initial;
+        $sessions->time_finish = $request->time_finish;
+        $sessions->room_id = $request->room_id;
+        $sessions->movie_id = $request->movie_id;
+
+        $sessions->save();
     }
+
 
     public static function alter($id, Request $request)
     {
@@ -77,8 +81,6 @@ class Session extends Model
 
     public static function getSessionsWithMovies()
     {
-        return Session::with('movie', 'room')
-            ->orderBy('date')->orderBy('time')
-            ->get();
+        return Session::where('room_id');
     }
 }

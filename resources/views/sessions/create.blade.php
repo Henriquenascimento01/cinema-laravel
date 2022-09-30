@@ -8,8 +8,11 @@
 
     <div id="movie-create-container" class="col-md-6 offset-md-3">
         <h1>Cadastrar sessão</h1>
-        @error('msg')
-        @enderror
+        @if (session('msg'))
+            <div class="alert alert-success" role="alert">
+                <p class="msg">{{ session('msg') }}</p>
+            </div>
+        @endif
         <form action="{{ route('sessions-store') }}" method="POST">
             @csrf
             <div class="form-group">
@@ -30,9 +33,9 @@
             <div class="form-group">
                 <label for="room_id">ID sala:</label>
                 <select name="room_id" id="room_id" class="form-control">
-                    <option selected="disabled" value="room_id">Selecione</option>
+                    <option selected="disabled" name="room_id" value="room_id">Selecione</option>
                     @foreach ($rooms as $room)
-                        <option name="room_id" value="{{ $room->id }}">{{ $room->number }}</option>
+                        <option name="room_id" value="{{ $room->id }}"> {{ $room->number }}</option>
                     @endforeach
                 </select>
             </div>
@@ -41,7 +44,7 @@
                 <label for="name">Filme:</label>
 
                 <select name="movie_id" id="movie_id" class="form-control">
-                    <option selected="disabled" value="movie_id">Selecione</option>
+                    <option selected="disabled" name="movie_id" value="movie_id">Selecione</option>
                     @foreach ($movies as $movie)
                         <option name="movie_id" value="{{ $movie->id }}">{{ $movie->name }}</option>
                     @endforeach

@@ -61,11 +61,11 @@
     <main>
         <div class="container-fluid">
             <div class="mt-5">
-                @if (session('msg'))
+                {{-- @if (session('msg'))
                     <div class="alert alert-success" role="alert">
                         <p class="msg">{{ session('msg') }}</p>
                     </div>
-                @endif
+                @endif --}}
                 @yield('content')
             </div>
         </div>

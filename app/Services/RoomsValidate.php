@@ -10,29 +10,35 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 
-// class RoomsValidate
-// {
+class RoomsValidate
+{
 
-//     public static function IsMovieaRoom(Request $request)
-//     {
-//     }
+    public static function usedRoom(Request $request)
+    {
+        
 
+        $roomTransmition = $request->room_id;
 
-//     public static function usedRoom(Request $sessionAdded)
-//     {
-//         $orndenedSessions = Session::getSessionsWithMovies();
+        
+        
+    }
 
-//         foreach ($orndenedSessions as $sessions) {
-//             if ($sessions->room->number == $sessionAdded->room_id) {
+    
+    // public static function usedRoom(Request $sessionAdded)
+    // {
+    //     $orndenedSessions = Session::getSessionsWithMovies();
 
-//                 $sessionDateTime = new DateTime($sessions->date . $sessions->time, new DateTimeZone('America/Sao_Paulo'));
-//                 $sessionEndedIn = new DateTime($sessions->date . $sessions->time_finish, new DateTimeZone('America/Sao_Paulo'));
-//                 $sessionToAddDateTime = new DateTime($sessionAdded->date . $sessionAdded->time, new DateTimeZone('America/Sao_Paulo'));
+    //     foreach ($orndenedSessions as $sessions) {
+    //         if ($sessions->rooms->number == $sessionAdded->room_id) {
 
-//                 if ($sessionToAddDateTime > $sessionDateTime && $sessionToAddDateTime < $sessionEndedIn) {
-//                     return true;
-//                 }
-//             }
-//         }
-//     }
-// }
+    //             $sessionDateTime = new DateTime($sessions->date . $sessions->time_initial, new DateTimeZone('America/Sao_Paulo'));
+    //             $sessionEndedIn = new DateTime($sessions->date . $sessions->time_finish, new DateTimeZone('America/Sao_Paulo'));
+    //             $sessionToAddDateTime = new DateTime($sessionAdded->date . $sessionAdded->time_initial, new DateTimeZone('America/Sao_Paulo'));
+
+    //             if ($sessionToAddDateTime > $sessionDateTime && $sessionToAddDateTime < $sessionEndedIn) {
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    // }
+}

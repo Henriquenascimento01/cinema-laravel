@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Movie;
 use Illuminate\Cache\RedisTaggedCache;
 use App\Models\Room;
+use App\Http\Requests\ValidateFormMoviesCreate;
 
 class MovieController extends Controller
 {
@@ -23,8 +24,9 @@ class MovieController extends Controller
         return view('movies.create');
     }
 
-    public function store(Request $request)
+    public function store(ValidateFormMoviesCreate $request)
     {
+        $request->validated();
 
         $movies = new Movie;
 
@@ -49,8 +51,10 @@ class MovieController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidateFormMoviesCreate $request, $id)
     {
+        $request->validated();
+
         $data = [
             'name' => $request->name,
             'description' => $request->description,

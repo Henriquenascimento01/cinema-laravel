@@ -7,7 +7,7 @@ use App\Services\RoomsValidate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\ValidateFormRoomsCreate;
 
 class Room extends Model
 {
@@ -31,8 +31,9 @@ class Room extends Model
         return Room::all();
     }
 
-    public static function store(Request $request)
-    {
+    public static function store(ValidateFormRoomsCreate  $request)
+    {   
+        $request->validated();
         // if (RoomsValidate::usedRoom($request)) {
         //     return back()->withErrors('Error');
         // }

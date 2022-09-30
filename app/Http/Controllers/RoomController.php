@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Room;
+use App\Http\Requests\ValidateFormRoomsCreate;
 
 class RoomController extends Controller
 {
@@ -21,8 +22,10 @@ class RoomController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(ValidateFormRoomsCreate $request)
     {
+        $request->validated();
+
         try {
             Room::store($request);
 
@@ -47,9 +50,10 @@ class RoomController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidateFormRoomsCreate $request, $id)
     {
         //dd($request);
+        $request->validated();
 
         $data = [
             'number' => $request->number

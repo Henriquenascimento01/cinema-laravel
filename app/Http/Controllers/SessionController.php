@@ -6,6 +6,7 @@ use App\Models\Movie;
 use App\Models\Room;
 use App\Models\Session;
 use Illuminate\Http\Request;
+use App\Http\Requests\ValidateFormSessionCreate;
 use Illuminate\Support\Facades\DB;
 
 class SessionController extends Controller
@@ -23,13 +24,19 @@ class SessionController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ValidateFormSessionCreate $request)
     {
-        $return = Session::store($request);
 
-        if ($return == true) {
+        $request->validated();
+        //dd($request);
+        try {
+            Session::store($request);
+
             return redirect('/')->with('msg', 'Sessão criada com sucesso!');
-        } else return back()->withErrors('msg', $return);
+        } catch (\PDOException $e) {
+
+            return $e->getMessage();
+        }
     }
 
 
@@ -55,7 +62,7 @@ class SessionController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidateFormSessionCreate $request, $id)
     {
         Session::alter($id, $request);
 
