@@ -11,9 +11,9 @@ class Movie extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name",
-        "description",
-        "image",
+        'name',
+        'description',
+        "tag",
 
     ];
 
@@ -22,12 +22,8 @@ class Movie extends Model
         return $this->hasMany(Session::class);
     }
 
-    public function tags()
-    {
-        return $this->belongsTo(Tag::class);
-    }
 
-    public static function geAll()
+    public static function getAll()
     {
         return Movie::all();
     }

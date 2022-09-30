@@ -12,6 +12,8 @@ class HomeController extends Controller
     {
         $sessions = Session::all();
 
-        return view('layouts.index', ['sessions' => $sessions]);
+        return view('layouts.index', [
+            'sessions' => $sessions,
+        ]);
     }
 }

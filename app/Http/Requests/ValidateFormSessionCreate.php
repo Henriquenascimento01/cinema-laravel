@@ -27,7 +27,9 @@ class ValidateFormSessionCreate extends FormRequest
             'date' => 'required',
             'time_initial' => 'required',
             'time_finish' => 'required',
-            'room_id' => 'required'
+            'room_id' => 'required',
+            'movie_id' => 'required',
+            'image' => 'required',
         ];
     }
 }

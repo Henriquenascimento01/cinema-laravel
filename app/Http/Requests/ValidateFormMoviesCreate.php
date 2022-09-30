@@ -24,8 +24,12 @@ class ValidateFormMoviesCreate extends FormRequest
     public function rules()
     {
         return [
+
             'name' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'tag' => 'required'
+            
+            
         ];
     }
 }

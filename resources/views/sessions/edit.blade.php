@@ -1,28 +1,40 @@
 @extends('layouts.main')
 
 
-@section('title', 'Salas disponiveis')
+@section('title', 'Edit')
 
 
 @section('content')
 
     <div id="movie-create-container" class="col-md-6 offset-md-3">
         <h1>Editar sessão</h1>
-        <form action="{{ route('sessions-update', ['id' => $sessions->id]) }}" method="POST">
+        <form action="{{ route('sessions-update', ['id' => $sessions->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            @if (session('msg'))
+                <div class="alert alert-danger">
+                    {{ session('msg') }}
+                </div>
+            @endif
+            <div class="form-group">
+                <label for="image">Banner:</label>
+                <input type="file" class="form-control-file" id="image" name="image">
+                <img src="/img/movies{{ $sessions->image }}" class="image-preview">
+            </div>
+
             <div class="form-group">
                 <label for="date">Data:</label>
                 <input type="date" class="form-control" id="date" name="date" value="{{ $sessions->date }}">
             </div>
             <div class="form-group">
                 <label for="time">Horário inicio:</label>
-                <input type="time" class="form-control" id="time" name="time"
+                <input type="time" class="form-control" id="time_initial" name="time_initial"
                     value="{{ $sessions->time_initial }}">
             </div>
             <div class="form-group">
                 <label for="time">Horário termino:</label>
-                <input type="time" class="form-control" id="time" name="time" value="{{ $sessions->finish }}">
+                <input type="time" class="form-control" id="time_finish" name="time_finish"
+                    value="{{ $sessions->finish }}">
             </div>
 
             <div class="form-group">
@@ -31,7 +43,7 @@
                     <option value="room_id">Selecione</option>
                     @foreach ($rooms as $room)
                         <option @if ($sessions->room_id == $room->id) selected @endif name="room_id"
-                            value="{{ $sessions->room_number }}">{{ $sessions->room->number }}</option>
+                            value="{{ $room->id }}">{{ $room->number }}</option>
                     @endforeach
                 </select>
             </div>
@@ -42,7 +54,7 @@
                     <option value="movie_id">Selecione</option>
                     @foreach ($movies as $movie)
                         <option @if ($sessions->movie_id == $movie->id) selected @endif name="movie_id"
-                            value="{{ $sessions->movie_name }}">{{ $sessions->movie->name }}</option>
+                            value="{{ $movie->id }}">{{ $movie->name }}</option>
                     @endforeach
                 </select>
 

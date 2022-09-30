@@ -9,12 +9,18 @@
     <div id="movie-create-container" class="col-md-6 offset-md-3">
         <h1>Cadastrar sessão</h1>
         @if (session('msg'))
-            <div class="alert alert-success" role="alert">
-                <p class="msg">{{ session('msg') }}</p>
+            <div class="alert alert-danger">
+                {{ session('msg') }}
             </div>
         @endif
-        <form action="{{ route('sessions-store') }}" method="POST">
+        <form action="{{ route('sessions-store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+
+            <div class="form-group">
+                <label for="image">Banner:</label>
+                <input type="file" class="form-control-file" id="image" name="image">
+            </div>
+
             <div class="form-group">
                 <label for="date">Data:</label>
                 <input type="date" class="form-control" id="date" name="date" placeholder="Data de transmissão">

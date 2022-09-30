@@ -11,6 +11,11 @@
         <form action="{{ route('movies-update', ['id' => $movies->id]) }}" method="POST">
             @csrf
             @method('PUT')
+            @if (session('danger'))
+                <div class="alert alert-danger">
+                    {{ session('danger') }}
+                </div>
+            @endif
             <div class="form-group">
                 <label for="title">Titulo:</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Titulo do filme"
@@ -30,7 +35,7 @@
                     <option value="ficcao">Ficção científica</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label for="number">Descrição:</label>
                 <textarea name="description" id="description" cols="10" rows="5" class="form-control">{{ $movies->description }}</textarea>

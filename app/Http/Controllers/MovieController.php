@@ -13,8 +13,8 @@ class MovieController extends Controller
     public function index()
     {
 
-        $movies = Movie::geAll();
-
+        $movies = Movie::getAll();
+        
         return view('movies.index', ['movies' => $movies]);
     }
 
@@ -26,16 +26,15 @@ class MovieController extends Controller
 
     public function store(ValidateFormMoviesCreate $request)
     {
-        $request->validated();
+        //dd($request);
 
         $movies = new Movie;
 
         $movies->name = $request->name;
         $movies->description = $request->description;
+        $movies->tag = $request->tag;
 
         $movies->save();
-
-        //return view('movies.index');
 
         return redirect('/movies');
     }
@@ -53,11 +52,12 @@ class MovieController extends Controller
 
     public function update(ValidateFormMoviesCreate $request, $id)
     {
-        $request->validated();
+        // $request->validated();
 
         $data = [
             'name' => $request->name,
             'description' => $request->description,
+            'tag' => $request->tag
             // incluir campos faltantes
         ];
 

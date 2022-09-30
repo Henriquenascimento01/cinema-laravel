@@ -19,7 +19,9 @@
         <div id="cards-container" class="row">
             @foreach ($sessions as $session)
                 <div class="col md-4">
-                    <img src="/img/Logozoeira.png" alt="">
+
+                    <img src="/img/movies/{{ $session->image }}">
+
                     <div class="card-body">
                         <p class="card-date">{{ $session->date }}</p>
                         <h5 class="card-title">{{ $session->movie->name }}</h5>

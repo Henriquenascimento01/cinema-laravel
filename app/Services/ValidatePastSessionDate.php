@@ -3,23 +3,26 @@
 namespace App\Services;
 
 use DateTime;
-use Illuminate\Http\Request;
+use DateTimeZone;
 use App\Http\Requests\ValidateFormSessionCreate;
+use App\Services\CurrentDate;
 
 class ValidatePastSessionDate
 {
 
-    public static function pastDate(ValidateFormSessionCreate $request)
+    public static function pastDate(ValidateFormSessionCreate $request): bool
     {
-        $request->validated();
-        // dd($request);
+        date_default_timezone_set('America/Sao_Paulo');
 
-        $sessionDateInit = $request->date;
-        $sessionTimeInit = $request->time_initial;
+        $sessionTime = new DateTime($request->date . $request->time_initial, new DateTimeZone('America/Sao_Paulo'));
+        $currentDate = CurrentDate::get();
 
+        // dd($sessionTime > $currentDate);
 
-        if ($sessionDateInit < new DateTime() && $sessionTimeInit < new DateTime()) {
-            return false;
+        if ($sessionTime < $currentDate) {
+            return true;
         }
+
+        return false;
     }
 }

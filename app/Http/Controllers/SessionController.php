@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidateFormRoomsCreate;
 use App\Models\Movie;
 use App\Models\Room;
 use App\Models\Session;
@@ -27,15 +28,15 @@ class SessionController extends Controller
     public function store(ValidateFormSessionCreate $request)
     {
 
-        $request->validated();
+
         //dd($request);
         try {
             Session::store($request);
 
             return redirect('/')->with('msg', 'Sessão criada com sucesso!');
-        } catch (\PDOException $e) {
+        } catch (\PDOException) {
 
-            return $e->getMessage();
+            return back()->withErrors('msg', 'Sala usada');
         }
     }
 
@@ -47,7 +48,7 @@ class SessionController extends Controller
 
 
         if (!empty($sessions)) {
-            //dd($sessions);
+            
             $movies = Movie::all();
             $rooms = Room::all();
 
@@ -63,10 +64,11 @@ class SessionController extends Controller
     }
 
     public function update(ValidateFormSessionCreate $request, $id)
-    {
-        Session::alter($id, $request);
+    {   //dd($request);
+        Session::alter($request, $id);
 
-        return redirect()->route('index');
+ 
+        return redirect('/')->with('msg', 'Sessão alterada com sucesso');
     }
 
     public function destroy($id)

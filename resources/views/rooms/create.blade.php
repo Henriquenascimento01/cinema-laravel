@@ -8,6 +8,11 @@
 
     <div id="movie-create-container" class="col-md-4 offset-md-3">
         <h1>Criar sala de transmissão</h1>
+        @if (session('danger'))
+            <div class="alert alert-danger">
+                {{ session('danger') }}
+            </div>
+        @endif
         <form action="{{ route('rooms-store') }}" method="POST">
             @csrf
             <div class="form-group">

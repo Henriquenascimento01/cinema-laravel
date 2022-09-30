@@ -23,7 +23,7 @@
                     <th scope="row">{{ $movie->id }}</th>
                     <th scope="row">{{ $movie->name }}</th>
                     <th scope="row">{{ $movie->description }}</th>
-                    <th scope="row">Terror</th>
+                    <th scope="row">{{ $movie->tag }}</th>
                     
                     <td>
                         <a href="{{ route('movies-edit', ['id' => $movie->id]) }}" class="btn btn-warning">Editar</a>

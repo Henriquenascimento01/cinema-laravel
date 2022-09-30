@@ -10,24 +10,29 @@
         <h1>Cadastre o filme</h1>
         <form action="{{ route('movies-store') }}" method="POST">
             @csrf
-
+            @if (session('danger'))
+                <div class="alert alert-danger">
+                    {{ session('danger') }}
+                </div>
+            @endif
             <div class="form-group">
                 <label for="title">Titulo:</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Titulo do filme">
             </div>
+
             <div>
                 <label for="tag">Gênero:</label>
                 <select name="tag" id="tag" class="form-control">
                     <option selected="disabled" value="Selecione"></option>
-                    <option value="acao">Ação</option>
-                    <option value="comedia">Comédia</option>
-                    <option value="comedia">Desenho</option>
-                    <option value="drama">Drama</option>
-                    <option value="romance">Romance</option>
-                    <option value="documentario">Documentário</option>
-                    <option value="suspense">Suspense</option>
-                    <option value="terror">Terror</option>
-                    <option value="ficcao">Ficção científica</option>
+                    <option value="Acao">Ação</option>
+                    <option value="Comedia">Comédia</option>
+                    <option value="Desenho">Desenho</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Documentario">Documentário</option>
+                    <option value="Suspense">Suspense</option>
+                    <option value="Terror">Terror</option>
+                    <option value="Ficcao">Ficção científica</option>
                 </select>
             </div>
 

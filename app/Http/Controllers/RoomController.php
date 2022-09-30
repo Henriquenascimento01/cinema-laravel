@@ -24,7 +24,7 @@ class RoomController extends Controller
 
     public function store(ValidateFormRoomsCreate $request)
     {
-        $request->validated();
+       // $request->validated();
 
         try {
             Room::store($request);
@@ -53,7 +53,7 @@ class RoomController extends Controller
     public function update(ValidateFormRoomsCreate $request, $id)
     {
         //dd($request);
-        $request->validated();
+        //$request->validated();
 
         $data = [
             'number' => $request->number
