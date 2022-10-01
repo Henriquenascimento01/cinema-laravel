@@ -28,8 +28,6 @@ class SessionController extends Controller
     public function store(ValidateFormSessionCreate $request)
     {
 
-
-        //dd($request);
         try {
             Session::store($request);
 
@@ -48,7 +46,7 @@ class SessionController extends Controller
 
 
         if (!empty($sessions)) {
-            
+
             $movies = Movie::all();
             $rooms = Room::all();
 
@@ -64,10 +62,10 @@ class SessionController extends Controller
     }
 
     public function update(ValidateFormSessionCreate $request, $id)
-    {   //dd($request);
+    {   
         Session::alter($request, $id);
 
- 
+
         return redirect('/')->with('msg', 'Sessão alterada com sucesso');
     }
 

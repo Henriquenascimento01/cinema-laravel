@@ -17,7 +17,6 @@ class ValidatePastSessionDate
         $sessionTime = new DateTime($request->date . $request->time_initial, new DateTimeZone('America/Sao_Paulo'));
         $currentDate = CurrentDate::get();
 
-        // dd($sessionTime > $currentDate);
 
         if ($sessionTime < $currentDate) {
             return true;

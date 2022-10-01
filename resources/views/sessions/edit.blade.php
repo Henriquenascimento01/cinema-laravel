@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="time">Horário termino:</label>
                 <input type="time" class="form-control" id="time_finish" name="time_finish"
-                    value="{{ $sessions->finish }}">
+                    value="{{ $sessions->time_finish }}">
             </div>
 
             <div class="form-group">

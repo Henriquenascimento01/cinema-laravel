@@ -21,7 +21,6 @@ class ValidateCineOpened
 
     $session = new DateTime($request->date . $request->time_initial);
 
-    //dd($session < $hourOpening || $session > $hourClosed);
     if ($session < $hourOpening || $session > $hourClosed) {
       return false;
     }

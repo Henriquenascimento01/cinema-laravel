@@ -36,7 +36,6 @@ class Session extends Model
     }
 
 
-
     public static function store(ValidateFormSessionCreate $request)
     {
 
@@ -94,6 +93,8 @@ class Session extends Model
             return back()->withErrors('msg', 'Data invalida');
         }
 
+        // if(RoomsValidate::usedRoom())
+
         $data = [
             'date' => $request->date,
             'time_initial' => $request->time_initial,
@@ -119,8 +120,11 @@ class Session extends Model
         Session::where('id', $id)->update($data);
     }
 
+
     public static function getSessionsWithMovies()
     {
-        return Session::where('room_id');
+        return Session::with('sessions', 'room')
+            ->orderBy('date')->orderBy('time')
+            ->get();
     }
 }
