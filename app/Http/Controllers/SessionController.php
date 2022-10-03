@@ -25,6 +25,17 @@ class SessionController extends Controller
         ]);
     }
 
+    public static function show($id)
+    {
+        $sessions = Session::findOrFail($id);
+
+        return view('sessions.infos', [
+            'sessions' => $sessions
+        ]);
+    }
+
+
+
     public function store(ValidateFormSessionCreate $request)
     {
 
@@ -62,7 +73,7 @@ class SessionController extends Controller
     }
 
     public function update(ValidateFormSessionCreate $request, $id)
-    {   
+    {
         Session::alter($request, $id);
 
 

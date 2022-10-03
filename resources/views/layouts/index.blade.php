@@ -27,7 +27,8 @@
                         <h5 class="card-title">{{ $session->movie->name }}</h5>
                         <p class="card-duration">Inicio: {{ $session->time_initial }}</p>
                         <p class="card-duration">Término: {{ $session->time_finish }}</p>
-                        <a href="" class="btn btn-info">Mais informações</a>
+                        <a href="{{ route('sessions-show', ['id' => $session->id]) }}" class="btn btn-info">Mais
+                            informações</a>
                         <a href="{{ route('sessions-edit', ['id' => $session->id]) }}" class="btn btn-warning">Editar</a>
                         <form action="{{ route('sessions-destroy', ['id' => $session->id]) }}" method="POST"
                             class="form-group">

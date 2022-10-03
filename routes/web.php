@@ -23,7 +23,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => 'auth'], function () {
-
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 });
@@ -52,6 +51,7 @@ Route::prefix('/sessions')->group(function () {
     Route::delete('/{id}', [SessionController::class, 'destroy'])->where('id', '[0-9]+')->name('sessions-destroy')->middleware('auth');
     Route::post('/', [SessionController::class, 'store'])->name('sessions-store')->middleware('auth');
     Route::put('/{id}', [SessionController::class, 'update'])->name('sessions-update')->middleware('auth')->middleware('auth');
+    Route::get('/show/{id}', [SessionController::class, 'show'])->name('sessions-show')->middleware('auth');
 });
 
 
