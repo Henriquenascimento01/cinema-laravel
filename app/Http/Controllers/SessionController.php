@@ -31,10 +31,10 @@ class SessionController extends Controller
         try {
             Session::store($request);
 
-            return redirect('/')->with('msg', 'Sessão criada com sucesso!');
+            return redirect('/')->with('msg-sucess', 'Sessão criada com sucesso!');
         } catch (\PDOException) {
 
-            return back()->withErrors('msg', 'Sala usada');
+            return back()->withErrors('msg-error', 'Sala usada');
         }
     }
 
@@ -66,7 +66,7 @@ class SessionController extends Controller
         Session::alter($request, $id);
 
 
-        return redirect('/')->with('msg', 'Sessão alterada com sucesso');
+        return redirect('/')->with('msg-sucess-edit', 'Sessão alterada com sucesso');
     }
 
     public function destroy($id)

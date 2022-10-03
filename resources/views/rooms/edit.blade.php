@@ -18,6 +18,15 @@
         <form action="{{ route('rooms-update', ['id' => $rooms->id]) }}" method="POST">
             @csrf
             @method('PUT')
+            @if ($errors->any())
+                <ul class="error">
+                    @foreach ($errors->all() as $error)
+                        <li class="alert alert-danger">
+                            {{ $error }}
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
             <div class="form-group">
                 <label for="number">Sala de transmissão:</label>
                 <input type="number" class="form-control" id="number" name="number" value="{{ $rooms->number }}">

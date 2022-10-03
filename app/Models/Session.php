@@ -41,12 +41,12 @@ class Session extends Model
 
 
         if (!ValidateCineOpened::cineOpened($request)) {
-            return back()->with('msg ', 'Cinema fechado');
+            return back()->withErrors('msg-error', 'Cinema fechado');
         }
 
         if (ValidatePastSessionDate::pastDate($request)) {
 
-            return back()->with('msg', 'Data invalida');
+            return back()->withErrors('msg-error', 'Data invalida');
         }
 
         // if (RoomsValidate::usedRoom($request)) {

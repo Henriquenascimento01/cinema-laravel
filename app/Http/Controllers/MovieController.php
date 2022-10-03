@@ -12,9 +12,14 @@ class MovieController extends Controller
 {
     public function index()
     {
-
+        $search = Movie::getSearchMovie();
         $movies = Movie::getAll();
-        
+
+        if (empty($search)) {
+
+            return view('movies.index', ['movies' => $movies, 'search' => $search]);
+        }
+
         return view('movies.index', ['movies' => $movies]);
     }
 

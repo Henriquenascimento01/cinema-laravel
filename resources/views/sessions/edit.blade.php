@@ -11,6 +11,15 @@
         <form action="{{ route('sessions-update', ['id' => $sessions->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            @if ($errors->any())
+                <ul class="error">
+                    @foreach ($errors->all() as $error)
+                        <li class="alert alert-danger">
+                            {{ $error }}
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
             @if (session('msg'))
                 <div class="alert alert-danger">
                     {{ session('msg') }}

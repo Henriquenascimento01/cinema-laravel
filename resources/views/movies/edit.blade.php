@@ -16,6 +16,15 @@
                     {{ session('danger') }}
                 </div>
             @endif
+            @if ($errors->any())
+                <ul class="error">
+                    @foreach ($errors->all() as $error)
+                        <li class="alert alert-danger">
+                            {{ $error }}
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
             <div class="form-group">
                 <label for="title">Titulo:</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Titulo do filme"

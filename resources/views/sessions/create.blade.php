@@ -8,10 +8,20 @@
 
     <div id="movie-create-container" class="col-md-6 offset-md-3">
         <h1>Cadastrar sessão</h1>
-        @if (session('msg'))
+        @if (session('msg-error'))
             <div class="alert alert-danger">
-                {{ session('msg') }}
+                {{ session('msg-error') }}
             </div>
+        @endif
+
+        @if ($errors->any())
+            <ul class="error">
+                @foreach ($errors->all() as $error)
+                    <li class="alert alert-danger">
+                        {{ $error }}
+                    </li>
+                @endforeach
+            </ul>
         @endif
         <form action="{{ route('sessions-store') }}" method="POST" enctype="multipart/form-data">
             @csrf
