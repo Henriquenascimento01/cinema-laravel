@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="collapse navbar-collapse" id="navbar">
                 <a href="/" class="navbar-brand">
-                    <img src="/img/Logozoeira.png" alt="Logo">
+                    <img src="/img/logocinemapreta.jpg" alt="Logo">
                 </a>
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -61,11 +61,11 @@
     <main>
         <div class="container-fluid">
             <div class="mt-5">
-                {{-- @if (session('msg'))
-                    <div class="alert alert-success" role="alert">
-                        <p class="msg">{{ session('msg') }}</p>
+                 @if (session('msg-error'))
+                    <div class="alert alert-danger" role="alert">
+                        <p class="msg">{{ session('msg-error') }}</p>
                     </div>
-                @endif --}}
+                @endif 
                 @yield('content')
             </div>
         </div>

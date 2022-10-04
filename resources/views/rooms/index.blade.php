@@ -9,13 +9,13 @@
 
     <table class="table">
         <thead>
-            <tr>
+            <tr class="rooms-index-title">
                 <th scope="col">Número</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($rooms as $room)
-                <tr>
+                <tr class="rooms-index-list">
                     <th scope="row">{{ $room->number }}</th>
                     <td>
                         <a href="{{ route('rooms-edit', ['id' => $room->id]) }}" class="btn btn-warning">Editar</a>

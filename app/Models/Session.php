@@ -39,19 +39,18 @@ class Session extends Model
     public static function store(ValidateFormSessionCreate $request)
     {
 
-
         if (!ValidateCineOpened::cineOpened($request)) {
-            return back()->withErrors('msg-error', 'Cinema fechado');
+            return back()->with('msg-error', 'Cinema fechado');
         }
 
         if (ValidatePastSessionDate::pastDate($request)) {
 
-            return back()->withErrors('msg-error', 'Data invalida');
+            return back()->with('msg-error', 'Data invalida');
         }
 
-        // if (RoomsValidate::usedRoom($request)) {
-        //     return back()->withErrors('Data invalida');
-        // }
+        if (RoomsValidate::usedRoom($request)) {
+            return back()->with('msg-error', 'Sala em uso');
+        }
 
         $sessions = new Session;
 
@@ -85,15 +84,17 @@ class Session extends Model
 
         if (!ValidateCineOpened::cineOpened($request)) {
 
-            return back()->withErrors('msg', 'Cinema fechado');
+            return back()->with('msg-error', 'Cinema fechado');
         }
 
         if (ValidatePastSessionDate::pastDate($request)) {
 
-            return back()->withErrors('msg', 'Data invalida');
+            return back()->with('msg-error', 'Data invalida');
         }
 
-        // if(RoomsValidate::usedRoom())
+        if (RoomsValidate::usedRoom($request)) {
+            return back()->with('msg-error', 'A sala em uso');
+        }
 
         $data = [
             'date' => $request->date,
@@ -118,13 +119,5 @@ class Session extends Model
         }
 
         Session::where('id', $id)->update($data);
-    }
-
-
-    public static function getSessionsWithMovies()
-    {
-        return Session::with('sessions', 'room')
-            ->orderBy('date')->orderBy('time')
-            ->get();
     }
 }

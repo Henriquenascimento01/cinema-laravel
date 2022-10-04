@@ -1,18 +1,14 @@
 @extends('layouts.main')
 
 
-@section('title', 'Salas disponiveis')
+@section('title', 'Cadastrar sessão')
 
 
 @section('content')
 
     <div id="movie-create-container" class="col-md-6 offset-md-3">
         <h1>Cadastrar sessão</h1>
-        @if (session('msg-error'))
-            <div class="alert alert-danger">
-                {{ session('msg-error') }}
-            </div>
-        @endif
+        
 
         @if ($errors->any())
             <ul class="error">
@@ -51,7 +47,7 @@
                 <select name="room_id" id="room_id" class="form-control">
                     <option selected="disabled" name="room_id" value="room_id">Selecione</option>
                     @foreach ($rooms as $room)
-                        <option name="room_id" value="{{ $room->id }}"> {{ $room->number }}</option>
+                        <option name="room_number" value="{{ $room->id }}"> {{ $room->number }}</option>
                     @endforeach
                 </select>
             </div>

@@ -31,7 +31,6 @@ class MovieController extends Controller
 
     public function store(ValidateFormMoviesCreate $request)
     {
-        //dd($request);
 
         $movies = new Movie;
 
@@ -57,13 +56,12 @@ class MovieController extends Controller
 
     public function update(ValidateFormMoviesCreate $request, $id)
     {
-        // $request->validated();
 
         $data = [
             'name' => $request->name,
             'description' => $request->description,
             'tag' => $request->tag
-            // incluir campos faltantes
+            
         ];
 
         Movie::where('id', $id)->update($data);

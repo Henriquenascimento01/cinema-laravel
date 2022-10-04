@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 
-@section('title', 'Salas')
+@section('title', 'Filmes')
 
 
 @section('content')
@@ -9,7 +9,7 @@
 
     <table class="table">
         <thead>
-            <tr>
+            <tr class="movies-index-title">
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Descrição</th>
@@ -19,7 +19,7 @@
 
         <tbody>
             @foreach ($movies as $movie)
-                <tr>
+                <tr class="movies-index-list">
                     <th scope="row">{{ $movie->id }}</th>
                     <th scope="row">{{ $movie->name }}</th>
                     <th scope="row">{{ $movie->description }}</th>

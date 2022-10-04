@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 
-@section('title', 'Cinema')
+@section('title', 'Cadastrar sala')
 
 
 @section('content')
@@ -31,5 +31,4 @@
             <input type="submit" class="btn btn-success" value="Cadastrar">
         </form>
     </div>
-
 @endsection
