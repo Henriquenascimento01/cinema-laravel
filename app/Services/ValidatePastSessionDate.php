@@ -8,7 +8,8 @@ use App\Http\Requests\ValidateFormSessionCreate;
 use App\Services\CurrentDate;
 
 class ValidatePastSessionDate
-{
+{   
+    // verifica se a data de criação da sessão é uma data passada
 
     public static function pastDate(ValidateFormSessionCreate $request): bool
     {

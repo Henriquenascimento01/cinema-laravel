@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Http\Request;
 use App\Services\RoomsValidate;
 use App\Services\ValidatePastSessionDate;
 use App\Services\ValidateCineOpened;
 use App\Http\Requests\ValidateFormSessionCreate;
+use Illuminate\Database\Eloquent\Model;
 
 class Session extends Model
 {

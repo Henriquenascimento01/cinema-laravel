@@ -6,10 +6,9 @@ use DateTime;
 use DateTimeZone;
 
 
-
-
 class CurrentDate
-{
+{   
+    // retorna a data atual
 
     public static function get()
     {

@@ -33,9 +33,6 @@ class Movie extends Model
     }
 
 
-
-
-
     public static function store(ValidateFormMoviesCreate $request)
     {
 
@@ -54,6 +51,11 @@ class Movie extends Model
 
     public static function alter(ValidateFormMoviesCreate $request, $id)
     {
+
+        if (ExistingMovies::checkRepeated($request)) {
+            return back()->with('msg-error', 'Filme já cadastrado');
+        }
+
         $data = [
             'name' => $request->name,
             'description' => $request->description,

@@ -14,25 +14,24 @@
         </form>
     </div>
     <div id="movie-container" class="col md-12">
-        <h2>Proximas Sessões</h2>
-        <p class="subtitle">Veja as sessões dos proximos dias</p>
+        <h2>Filmes encontrados</h2>
 
         <div id="cards-container" class="row">
 
-            @foreach ($sessions as $session)
+            @foreach ($movies as $movie)
                 <div class="col md-4">
 
-                    <img src="/img/movies/{{ $session->image }}">
+                    <img src="/img/movies/{{ $movie->image }}">
 
                     <div class="card-body">
-                        <p class="card-date">{{ $session->date }}</p>
-                        <h5 class="card-title">{{ $session->movie->name }}</h5>
-                        <p class="card-duration">Inicio: {{ $session->time_initial }}</p>
-                        <p class="card-duration">Término: {{ $session->time_finish }}</p>
-                        <a href="{{ route('sessions-show', ['id' => $session->id]) }}" class="btn btn-info">Mais
+                        <p class="card-date">{{ $movie->date }}</p>
+                        <h5 class="card-title">{{ $movie->name }}</h5>
+                        <p class="card-duration">Inicio: {{ $movie->time_initial }}</p>
+                        <p class="card-duration">Término: {{ $movie->time_finish }}</p>
+                        <a href="{{ route('sessions-show', ['id' => $movie->id]) }}" class="btn btn-info">Mais
                             informações</a>
-                        <a href="{{ route('sessions-edit', ['id' => $session->id]) }}" class="btn btn-warning">Editar</a>
-                        <form action="{{ route('sessions-destroy', ['id' => $session->id]) }}" method="POST"
+                        <a href="{{ route('sessions-edit', ['id' => $movie->id]) }}" class="btn btn-warning">Editar</a>
+                        <form action="{{ route('sessions-destroy', ['id' => $movie->id]) }}" method="POST"
                             class="form-group">
                             @csrf
                             @method('DELETE')

@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 
 class ExistingMovies
 {
+    // verifica se o filme cadastrado já existe
 
     public static function checkRepeated(ValidateFormMoviesCreate $request)
     {
