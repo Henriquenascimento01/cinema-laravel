@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
+   // Route::get('/', [HomeController::class, 'search'])->name('search');
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 });
 

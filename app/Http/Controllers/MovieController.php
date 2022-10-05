@@ -12,13 +12,8 @@ class MovieController extends Controller
 {
     public function index()
     {
-        $search = Movie::getSearchMovie();
+
         $movies = Movie::getAll();
-
-        if (empty($search)) {
-
-            return view('movies.index', ['movies' => $movies, 'search' => $search]);
-        }
 
         return view('movies.index', ['movies' => $movies]);
     }
@@ -31,16 +26,14 @@ class MovieController extends Controller
 
     public function store(ValidateFormMoviesCreate $request)
     {
+        try {
+            Movie::store($request);
 
-        $movies = new Movie;
+            return redirect('/')->with('msg-sucess', 'Filme cadastrado com sucesso!');
+        } catch (\PDOException) {
 
-        $movies->name = $request->name;
-        $movies->description = $request->description;
-        $movies->tag = $request->tag;
-
-        $movies->save();
-
-        return redirect('/movies');
+            return back()->with('msg-error', "Algo inesperado ocorreu");
+        }
     }
 
     public function edit($id)
@@ -57,14 +50,10 @@ class MovieController extends Controller
     public function update(ValidateFormMoviesCreate $request, $id)
     {
 
-        $data = [
-            'name' => $request->name,
-            'description' => $request->description,
-            'tag' => $request->tag
-            
-        ];
+        Movie::alter($request, $id);
 
-        Movie::where('id', $id)->update($data);
+
+        return redirect('/')->with('msg-sucess-edit', 'Filme alterado com sucesso');
 
         return redirect()->route('index');
     }

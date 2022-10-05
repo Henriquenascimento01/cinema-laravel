@@ -6,7 +6,18 @@
 
 @section('content')
 
-
+    <main>
+        <div class="container-fluid">
+            <div class="mt-5">
+                @if (session('msg-error'))
+                    <div class="alert alert-danger" role="alert">
+                        <p class="msg">{{ session('msg-error') }}</p>
+                    </div>
+                @endif
+                @yield('content')
+            </div>
+        </div>
+    </main>
     <table class="table">
         <thead>
             <tr class="movies-index-title">
@@ -24,10 +35,11 @@
                     <th scope="row">{{ $movie->name }}</th>
                     <th scope="row">{{ $movie->description }}</th>
                     <th scope="row">{{ $movie->tag }}</th>
-                    
+
                     <td>
                         <a href="{{ route('movies-edit', ['id' => $movie->id]) }}" class="btn btn-warning">Editar</a>
-                        <form action="{{ route('movies-destroy', ['id' => $movie->id]) }}" method="POST" class="form-group">
+                        <form action="{{ route('movies-destroy', ['id' => $movie->id]) }}" method="POST"
+                            class="form-group">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger mt-2">Apagar</button>

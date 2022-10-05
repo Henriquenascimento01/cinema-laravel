@@ -23,7 +23,6 @@ class Session extends Model
         'image'
     ];
 
-    // protected $guarded = [];
 
     public function movie()
     {
@@ -73,7 +72,6 @@ class Session extends Model
 
             $sessions->image = $imageName;
         }
-
 
         $sessions->save();
     }

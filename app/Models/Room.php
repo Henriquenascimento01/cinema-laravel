@@ -33,10 +33,7 @@ class Room extends Model
 
     public static function store(ValidateFormRoomsCreate  $request)
     {   
-        $request->validated();
-        // if (RoomsValidate::usedRoom($request)) {
-        //     return back()->withErrors('Error');
-        // }
+    
         $rooms = new Room;
 
         $rooms->number = $request->number;
@@ -50,14 +47,14 @@ class Room extends Model
         $movie = Room::findOrFail($id);
 
         if (!$movie->sessions()->get()->isEmpty()) {
-            return back()->withErrors(['Sala vinculada à uma sessão']);
+            return back()->with('msg-error', 'Sala vinculada à uma sessão');
         }
 
         try {
 
             $movie->delete();
         } catch (\PDOException) {
-            return back()->withErrors('msg', 'Sala vinculada à uma sessão');
+            return back()->with('msg-error', 'Sala vinculada à uma sessão');
         }
     }
 }

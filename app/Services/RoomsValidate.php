@@ -33,7 +33,6 @@ class RoomsValidate
 
         foreach ($registredSessions as $session) {
 
-            // dd($sessionInit->format('H:i:s'), $session->time_initial, $session->time_finish);
 
             if ($sessionInit == $session->time_initial && $sessionFinish == $session->time_finish) {
                 return true;
