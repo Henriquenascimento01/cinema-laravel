@@ -12,9 +12,11 @@
                 <div id="info-container" class="col-md-6">
                     <a href="{{ route('index') }}"" class="btn btn-primary">Página anterior</a>
                     <h1>{{ $sessions->movie->name }}</h1>
-                    <p class="session-date">Data: {{ $sessions->date }}</p>
-                    <p class="session-init">Inicio: {{ $sessions->time_initial }}</p>
-                    <p class="sessions-finish">Termino: {{ $sessions->time_finish }}</p>
+                    <p class="session-date">{{ \Carbon\Carbon::parse($sessions['date'])->format('d/m/Y') }}</p>
+                    <p class="session-init">Inicio: {{ \Carbon\Carbon::parse($sessions['time_initial'])->format('H:i') }}
+                    </p>
+                    <p class="sessions-finish">Termino: {{ \Carbon\Carbon::parse($sessions['time_finish'])->format('H:i') }}
+                    </p>
                     <p class="session-room">Sala: {{ $sessions->room->number }}</p>
                     <p class="session-tag">Gênero: {{ $sessions->movie->tag }}</p>
                 </div>

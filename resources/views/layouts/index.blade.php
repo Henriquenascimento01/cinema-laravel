@@ -27,8 +27,10 @@
                     <div class="card-body">
                         <p class="card-date">{{ \Carbon\Carbon::parse($session['date'])->format('d/m/Y') }}</p>
                         <h5 class="card-title">{{ $session->movie->name }}</h5>
-                        <p class="card-duration">Inicio: {{ \Carbon\Carbon::parse($session['time_initial'])->format('H:i') }}</p>
-                        <p class="card-duration">Término: {{ \Carbon\Carbon::parse($session['time_finish'])->format('H:i') }}</p>
+                        <p class="card-duration">Inicio:
+                            {{ \Carbon\Carbon::parse($session['time_initial'])->format('H:i') }}</p>
+                        <p class="card-duration">Término:
+                            {{ \Carbon\Carbon::parse($session['time_finish'])->format('H:i') }}</p>
                         <a href="{{ route('sessions-show', ['id' => $session->id]) }}" class="btn btn-info">Mais
                             informações</a>
                         <a href="{{ route('sessions-edit', ['id' => $session->id]) }}" class="btn btn-warning">Editar</a>
@@ -43,5 +45,4 @@
             @endforeach
         </div>
     </div>
-
 @endsection

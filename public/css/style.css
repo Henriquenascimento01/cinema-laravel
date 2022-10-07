@@ -6,11 +6,11 @@ body {
     min-height: 100vh;
     padding-bottom: 100px;
     position: relative;
-    background-color: black ; 
+    background-color: black;
 }
 
 header {
-    background-color: black; 
+    background-color: black;
     border-bottom: 1px solid;
 
 }
@@ -33,7 +33,7 @@ header {
 
 #navbar {
     justify-content: space-between;
-    background-color: black; 
+    background-color: black;
     padding: 5px 0;
 
 }
@@ -74,11 +74,20 @@ header {
 }
 
 
+/* Edição sessão */
+.img-preview {
+    width: 100px;
+    margin-top: 20px;
+}
+
+
+
 /* Lista de salas*/
 
 .rooms-index-list {
     color: white;
 }
+
 .rooms-index-title {
     color: white;
 }
@@ -88,6 +97,7 @@ header {
 .movies-index-list {
     color: white;
 }
+
 .movies-index-title {
     color: white;
 }
@@ -127,7 +137,7 @@ header {
 
 .card .card-date {
     font-size: 20px;
-    color: white; 
+    color: white;
 }
 
 .card .card-title {
@@ -141,7 +151,7 @@ header {
     font-size: 10px;
     font-weight: bold;
     margin-bottom: 30px;
-    color:white;
+    color: white;
 }
 
 .card-duration {
@@ -176,7 +186,7 @@ header {
 #image-container,
 #info-container {
     margin-top: 30px;
-    
+
 }
 
 #image-container img {
@@ -198,7 +208,7 @@ header {
     color: white;
 }
 
-#info-container h3, 
+#info-container h3,
 #description-container {
     font-size: 20px;
     font-weight: bold;

@@ -24,10 +24,12 @@
                     <img src="/img/movies/{{ $movie->image }}">
 
                     <div class="card-body">
-                        <p class="card-date">{{ $movie->date }}</p>
+                        <p class="card-date">{{ \Carbon\Carbon::parse($movie->date)->format('d/m/Y') }}</p>
                         <h5 class="card-title">{{ $movie->name }}</h5>
-                        <p class="card-duration">Inicio: {{ $movie->time_initial }}</p>
-                        <p class="card-duration">Término: {{ $movie->time_finish }}</p>
+                        <p class="card-duration">Inicio: {{ \Carbon\Carbon::parse($movie->time_initial)->format('H:i') }}
+                        </p>
+                        <p class="card-duration">Término: {{ \Carbon\Carbon::parse($movie->time_finish)->format('H:i') }}
+                        </p>
                         <a href="{{ route('sessions-show', ['id' => $movie->id]) }}" class="btn btn-info">Mais
                             informações</a>
                         <a href="{{ route('sessions-edit', ['id' => $movie->id]) }}" class="btn btn-warning">Editar</a>

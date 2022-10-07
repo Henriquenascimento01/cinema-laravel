@@ -26,13 +26,10 @@
                 <a href="/" class="navbar-brand">
                     <img src="/img/logocinemapreta.jpg" alt="Logo">
                 </a>
-                
+
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="/" class="nav-link">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('movies-index') }}" class="nav-link">Filmes</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('rooms-index') }}" class="nav-link">Salas</a>
