@@ -15,8 +15,8 @@ class Movie extends Model
     protected $fillable = [
         'name',
         'description',
-        "tag",
-
+        'tag',
+        'classification'
     ];
 
     public function sessions()
@@ -45,6 +45,7 @@ class Movie extends Model
         $movies->name = $request->name;
         $movies->description = $request->description;
         $movies->tag = $request->tag;
+        $movies->classification = $request->classification;
 
         $movies->save();
     }
@@ -59,7 +60,8 @@ class Movie extends Model
         $data = [
             'name' => $request->name,
             'description' => $request->description,
-            'tag' => $request->tag
+            'tag' => $request->tag,
+            'classification' => $request->classification
 
         ];
 

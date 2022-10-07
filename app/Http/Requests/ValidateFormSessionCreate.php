@@ -32,4 +32,18 @@ class ValidateFormSessionCreate extends FormRequest
             'image' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+
+            'date' => 'Campo data é obrigatório',
+            'time_initial' => 'Horário de inicio é obrigatório',
+            'time_finish' => 'Horário de termino é obrigatório',
+            'room_id' => 'A sala de transmissão é obrigatória',
+            'movie_id' => 'O filme é obrigatório',
+            'image' => 'A imagem é obrigatória'
+
+        ];
+    }
 }

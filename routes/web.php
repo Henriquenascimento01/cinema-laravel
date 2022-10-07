@@ -65,4 +65,3 @@ Route::post('/login', [AuthenticationController::class, 'logar'])->name('login')
 Route::fallback(function () {
     return "404 not found";
 });
-

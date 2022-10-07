@@ -27,4 +27,11 @@ class ValidateFormRoomsCreate extends FormRequest
             'number' => 'required'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'number' => 'Campo obrigatório'
+        ];
+    }
 }

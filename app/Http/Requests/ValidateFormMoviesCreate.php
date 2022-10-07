@@ -27,9 +27,19 @@ class ValidateFormMoviesCreate extends FormRequest
 
             'name' => 'required',
             'description' => 'required',
-            'tag' => 'required'
-            
-            
+            'tag' => 'required',
+            'classification' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name' => 'O titulo é obrigatório.',
+            'description' => 'A descrição é obrigatória.',
+            'tag' => 'O gênero é obrigatório',
+            'classification' => 'A classificação é obrigatória.'
+
         ];
     }
 }

@@ -56,7 +56,7 @@
                 <label for="name">Filme:</label>
 
                 <select name="movie_id" id="movie_id" class="form-control">
-                    <option selected="disabled" name="movie_id" value="movie_id">Selecione</option>
+                    <option selected="disabled" name="movie_id" value="{{ old('movie_id')}}">Selecione</option>
                     @foreach ($movies as $movie)
                         <option name="movie_id" value="{{ $movie->id }}">{{ $movie->name }}</option>
                     @endforeach

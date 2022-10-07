@@ -23,6 +23,7 @@
             <tr class="movies-index-title">
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
+                <th scope="col">Classificação indicativa</th>
                 <th scope="col">Descrição</th>
                 <th scope="col">Gênero</th>
             </tr>
@@ -33,6 +34,7 @@
                 <tr class="movies-index-list">
                     <th scope="row">{{ $movie->id }}</th>
                     <th scope="row">{{ $movie->name }}</th>
+                    <th scope="row">{{ $movie->classification }}</th>
                     <th scope="row">{{ $movie->description }}</th>
                     <th scope="row">{{ $movie->tag }}</th>
 
@@ -44,11 +46,10 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger mt-2">Apagar</button>
                         </form>
+
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-
-
 @endsection
