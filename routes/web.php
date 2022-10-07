@@ -56,11 +56,13 @@ Route::prefix('/sessions')->group(function () {
 });
 
 
-// Autentication
-Route::get('/login', [AuthenticationController::class, 'login'])->name('login.form');
+//Autentication
+
+Route::get('/login', [AuthenticationController::class, 'login'])->name('login-form');
 Route::post('/login', [AuthenticationController::class, 'logar'])->name('login');
 
 
 Route::fallback(function () {
     return "404 not found";
 });
+

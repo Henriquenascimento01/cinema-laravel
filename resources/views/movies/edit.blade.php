@@ -30,19 +30,16 @@
                 <input type="text" class="form-control" id="name" name="name" placeholder="Titulo do filme"
                     value="{{ $movies->name }}">
             </div>
-            <div>
+
+            <div class="form-group">
                 <label for="tag">Gênero:</label>
-                <select name="tag" id="tag" class="form-control" value="{{ $movies->tag }}">
-                    <option selected="disabled" value="Selecione"></option>
-                    <option value="acao">Ação</option>
-                    <option value="comedia">Comédia</option>
-                    <option value="drama">Drama</option>
-                    <option value="romance">Romance</option>
-                    <option value="documentario">Documentário</option>
-                    <option value="suspense">Suspense</option>
-                    <option value="terror">Terror</option>
-                    <option value="ficcao">Ficção científica</option>
-                </select>
+                <input class="form-control" type="text" name="tag" placeholder="Gênero" value="{{ $movies->tag }}">
+            </div>
+
+            <div class="form-group">
+                <label for="tag">Classificação indicativa:</label>
+                <input class="form-control" type="text" name="classification" placeholder="Classificação indicativa"
+                    value="{{ $movies->classification }}">
             </div>
 
             <div class="form-group">

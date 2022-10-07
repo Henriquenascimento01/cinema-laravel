@@ -24,16 +24,14 @@ class Room extends Model
 
 
 
-    // Consultas no banco 
-
     public static function getAll()
     {
         return Room::all();
     }
 
-    public static function store(ValidateFormRoomsCreate  $request)
-    {   
-    
+    public static function store(ValidateFormRoomsCreate $request)
+    {
+
         $rooms = new Room;
 
         $rooms->number = $request->number;
@@ -41,20 +39,25 @@ class Room extends Model
         $rooms->save();
     }
 
+    public static function alter(ValidateFormRoomsCreate $request, $id)
+    {
+
+        $data = [
+            'number' => $request->number
+        ];
+
+        Room::where('id', $id)->update($data);
+    }
+
     public static function destroy($id)
     {
 
-        $movie = Room::findOrFail($id);
+        $room = Room::findOrFail($id);
 
-        if (!$movie->sessions()->get()->isEmpty()) {
+        if (!$room->sessions()->get()->isEmpty()) {
             return back()->with('msg-error', 'Sala vinculada à uma sessão');
         }
 
-        try {
-
-            $movie->delete();
-        } catch (\PDOException) {
-            return back()->with('msg-error', 'Sala vinculada à uma sessão');
-        }
+        $room->delete();
     }
 }

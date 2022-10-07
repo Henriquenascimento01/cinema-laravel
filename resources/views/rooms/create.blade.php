@@ -26,7 +26,7 @@
             @endif
             <div class="form-group">
                 <label for="number">Sala de transmissão:</label>
-                <input type="number" class="form-control" id="number" name="number" placeholder="Sala de transmissão">
+                <input type="number" class="form-control" id="number" name="number" placeholder="Sala de transmissão" value="{{ old('number') }}">
             </div>
             <input type="submit" class="btn btn-success" value="Cadastrar">
         </form>

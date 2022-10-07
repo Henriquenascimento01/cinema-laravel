@@ -76,11 +76,6 @@ class Movie extends Model
             return back()->with('msg-error', 'Filme vinculado à uma sessão');
         }
 
-        try {
-
-            $room->delete();
-        } catch (\PDOException) {
-            return back()->with('msg-error', 'Filme vinculado à uma sessão');
-        }
+        $room->delete();
     }
 }

@@ -26,31 +26,28 @@
             @endif
             <div class="form-group">
                 <label for="title">Titulo:</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Titulo do filme">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Titulo do filme"
+                    value="{{ old('name') }}">
             </div>
 
-            <div>
+
+            <div class="form-group">
                 <label for="tag">Gênero:</label>
-                <select name="tag" id="tag" class="form-control">
-                    <option selected="disabled" value="Selecione"></option>
-                    <option value="Acao">Ação</option>
-                    <option value="Comedia">Comédia</option>
-                    <option value="Desenho">Desenho</option>
-                    <option value="Drama">Drama</option>
-                    <option value="Romance">Romance</option>
-                    <option value="Documentario">Documentário</option>
-                    <option value="Suspense">Suspense</option>
-                    <option value="Terror">Terror</option>
-                    <option value="Ficcao">Ficção científica</option>
-                </select>
+                <input class="form-control" type="text" name="tag" placeholder="Gênero" value="{{ old('tag') }}">
+            </div>
+
+            <div class="form-group">
+                <label for="tag">Classificação indicativa:</label>
+                <input class="form-control" type="text" name="classification" placeholder="Classificação indicativa"
+                    value="{{ old('classification') }}">
             </div>
 
             <div class="form-group mt-5">
                 <label for="number">Descrição:</label>
-                <textarea name="description" id="description" cols="10" rows="5" class="form-control"></textarea>
+                <textarea name="description" id="description" cols="10" rows="5" class="form-control"
+                    value="{{ old('description') }}"></textarea>
             </div>
             <input type="submit" class="btn btn-success" value="Cadastrar">
         </form>
     </div>
-
 @endsection

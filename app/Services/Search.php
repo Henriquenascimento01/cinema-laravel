@@ -23,6 +23,7 @@ class Search
                     'movies.name',
                     'movies.tag',
                     'movies.id',
+                    'sessions.id',
                     'sessions.image',
                     'sessions.date',
                     'sessions.time_initial',

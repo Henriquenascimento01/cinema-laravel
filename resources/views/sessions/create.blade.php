@@ -29,23 +29,23 @@
 
             <div class="form-group">
                 <label for="date">Data:</label>
-                <input type="date" class="form-control" id="date" name="date" placeholder="Data de transmissão">
+                <input type="date" class="form-control" id="date" name="date" placeholder="Data de transmissão" value="{{ old('date') }}">
             </div>
             <div class="form-group">
                 <label for="time">Horário inicio:</label>
                 <input type="time" class="form-control" id="time_initial" name="time_initial"
-                    placeholder="Horário de transmissão">
+                    placeholder="Horário de transmissão" value="{{ old('time_initial') }}">
             </div>
             <div class="form-group">
                 <label for="time">Horário termino:</label>
                 <input type="time" class="form-control" id="time_finish" name="time_finish"
-                    placeholder="Horário de transmissão">
+                    placeholder="Horário de transmissão" value="{{ old('time_finish') }}">
             </div>
 
             <div class="form-group">
                 <label for="room_id">ID sala:</label>
                 <select name="room_id" id="room_id" class="form-control">
-                    <option selected="disabled" name="room_id" value="room_id">Selecione</option>
+                    <option selected="disabled" name="room_id" value="{{ old('room_id')}}">Selecione</option>
                     @foreach ($rooms as $room)
                         <option name="room_number" value="{{ $room->id }}"> {{ $room->number }}</option>
                     @endforeach

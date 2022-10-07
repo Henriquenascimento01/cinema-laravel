@@ -7,8 +7,8 @@ use DateTimeZone;
 use App\Http\Requests\ValidateFormSessionCreate;
 use App\Services\CurrentDate;
 
-class ValidatePastSessionDate
-{   
+class ValidateSessionDate
+{
     // verifica se a data de criação da sessão é uma data passada
 
     public static function pastDate(ValidateFormSessionCreate $request): bool
@@ -23,6 +23,20 @@ class ValidatePastSessionDate
             return true;
         }
 
+        return false;
+    }
+
+    // verifica se o horário de inicio e termino da sessão são iguais
+
+    public static function finishAndStart(ValidateFormSessionCreate $request)
+    {
+
+        $sessionInit = $request->time_initial;
+        $sessionFinish = $request->time_finish;
+
+        if ($sessionInit == $sessionFinish) {
+            return true;
+        }
         return false;
     }
 }

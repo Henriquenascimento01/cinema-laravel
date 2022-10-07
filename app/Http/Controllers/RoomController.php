@@ -31,7 +31,7 @@ class RoomController extends Controller
             return redirect('/rooms');
         } catch (\PDOException) {
 
-            return back()->withErrors('Sala já existente');
+            return back()->with('msg-error', 'Sala já existente');
         }
     }
 
@@ -51,20 +51,24 @@ class RoomController extends Controller
 
     public function update(ValidateFormRoomsCreate $request, $id)
     {
+        try {
+            Room::alter($request, $id);
 
-        $data = [
-            'number' => $request->number
-        ];
+            return redirect()->route('rooms-index');
+        } catch (\PDOException) {
 
-        Room::where('id', $id)->update($data);
-
-        return redirect()->route('rooms-index');
+            return back()->with('msg-error', 'Algo inesperado ocorreu');
+        }
     }
 
     public function destroy($id)
     {
-        Room::destroy($id);
+        try {
+            Room::destroy($id);
 
-        return redirect()->route('rooms-index');
+            return redirect()->route('rooms-index');
+        } catch (\PDOException) {
+            return back()->with('msg-error', 'Sala vinculada à uma sessão');
+        }
     }
 }

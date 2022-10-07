@@ -10,6 +10,8 @@ use App\Services\ValidatePastSessionDate;
 use App\Services\ValidateCineOpened;
 use App\Http\Requests\ValidateFormSessionCreate;
 use Illuminate\Database\Eloquent\Model;
+use App\Services\ValidateSessionDate;
+use App\Services\ValidationServices;
 
 class Session extends Model
 {
@@ -39,17 +41,8 @@ class Session extends Model
     public static function store(ValidateFormSessionCreate $request)
     {
 
-        if (!ValidateCineOpened::cineOpened($request)) {
-            return back()->with('msg-error', 'Cinema fechado');
-        }
-
-        if (ValidatePastSessionDate::pastDate($request)) {
-
-            return back()->with('msg-error', 'Data invalida');
-        }
-
-        if (RoomsValidate::usedRoom($request)) {
-            return back()->with('msg-error', 'Sala em uso');
+        if (ValidationServices::validAll($request)) {
+            return back();
         }
 
         $sessions = new Session;
@@ -80,20 +73,10 @@ class Session extends Model
 
     public static function alter(ValidateFormSessionCreate $request, $id)
     {
-
-        if (!ValidateCineOpened::cineOpened($request)) {
-
-            return back()->with('msg-error', 'Cinema fechado');
+        if (ValidationServices::validAll($request)) {
+            return back();
         }
 
-        if (ValidatePastSessionDate::pastDate($request)) {
-
-            return back()->with('msg-error', 'Data invalida');
-        }
-
-        if (RoomsValidate::usedRoom($request)) {
-            return back()->with('msg-error', 'A sala em uso');
-        }
 
         $data = [
             'date' => $request->date,

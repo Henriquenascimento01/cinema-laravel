@@ -26,6 +26,7 @@
                 <a href="/" class="navbar-brand">
                     <img src="/img/logocinemapreta.jpg" alt="Logo">
                 </a>
+                
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="/" class="nav-link">Inicio</a>
@@ -35,6 +36,9 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('rooms-index') }}" class="nav-link">Salas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('movies-index') }}" class="nav-link">Filmes</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('sessions-create') }}" class="nav-link">Criar sessão</a>
@@ -61,11 +65,11 @@
     <main>
         <div class="container-fluid">
             <div class="mt-5">
-                 @if (session('msg-error'))
+                @if (session('msg-error'))
                     <div class="alert alert-danger" role="alert">
                         <p class="msg">{{ session('msg-error') }}</p>
                     </div>
-                @endif 
+                @endif
                 @yield('content')
             </div>
         </div>
@@ -75,7 +79,6 @@
         <p>Cinema &copy; 2022</p>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
     </footer>
 </body>
 

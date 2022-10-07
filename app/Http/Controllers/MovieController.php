@@ -49,19 +49,23 @@ class MovieController extends Controller
 
     public function update(ValidateFormMoviesCreate $request, $id)
     {
+        try {
+            Movie::alter($request, $id);
 
-        Movie::alter($request, $id);
-
-
-        return redirect('/')->with('msg-sucess-edit', 'Filme alterado com sucesso');
-
-        return redirect()->route('index');
+            return redirect('/')->with('msg-sucess-edit', 'Filme alterado com sucesso');
+        } catch (\PDOException) {
+            return back()->with('msg-error', "Algo inesperado ocorreu");
+        }
     }
 
     public function destroy($id)
     {
-        Movie::destroy($id);
+        try {
+            Movie::destroy($id);
 
-        return redirect()->route('movies-index');
+            return redirect()->route('movies-index');
+        } catch (\PDOException) {
+            return back()->with('msg-error', 'Filme vinculado à uma sessão');
+        }
     }
 }

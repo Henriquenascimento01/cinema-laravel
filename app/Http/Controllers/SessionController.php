@@ -74,10 +74,13 @@ class SessionController extends Controller
 
     public function update(ValidateFormSessionCreate $request, $id)
     {
-        Session::alter($request, $id);
+        try {
+            Session::alter($request, $id);
+            return redirect('/')->with('msg-sucess-edit', 'Sessão alterada com sucesso');
+        } catch (\PDOException) {
 
-
-        return redirect('/')->with('msg-sucess-edit', 'Sessão alterada com sucesso');
+            return back()->with('msg-error', 'Algo inesperado ocorreu');
+        }
     }
 
     public function destroy($id)
