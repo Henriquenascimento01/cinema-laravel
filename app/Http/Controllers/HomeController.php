@@ -29,7 +29,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function search(Request $request)
+    public function search(Request $request) // tratar request antes de mandar para outras camadas
     {
         $search = Search::movies(Str::lower($request->search));
 

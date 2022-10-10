@@ -13,7 +13,6 @@ class Search
     public static function movies(string $request)
     {
 
-        // $search = $request->search;
         try {
             $movies = DB::table('movies')
                 ->join('sessions', 'movies.id', '=', 'sessions.movie_id')
@@ -35,5 +34,5 @@ class Search
         } catch (\PDOException $e) {
             dd($e->getMessage());
         }
-    }
+    }       
 }

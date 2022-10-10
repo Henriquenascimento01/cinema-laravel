@@ -17,7 +17,6 @@ class FilterSessions
         $fiveDayMore = date('Y-m-d H:i:s', strtotime('+5 days', $actualDate->getTimestamp())); // Armazena data 5 dias a frente
 
 
-
         $sessions = Session::whereDate('date', '<=', $tenDaysLeft)
             ->orwhereDate('date', '<=', $fiveDayMore)
             ->get();

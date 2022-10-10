@@ -9,8 +9,8 @@ use Carbon\Carbon;
 use App\Http\Requests\ValidateFormSessionCreate;
 
 class ValidateCineOpened
-{ 
-    // determina o horário de funcionamento do cinema
+{
+  // determina o horário de funcionamento do cinema
 
   public static function cineOpened(ValidateFormSessionCreate $request): bool
   {

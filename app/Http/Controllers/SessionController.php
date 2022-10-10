@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ValidateFormRoomsCreate;
 use App\Models\Movie;
 use App\Models\Room;
 use App\Models\Session;
-use Illuminate\Http\Request;
 use App\Http\Requests\ValidateFormSessionCreate;
-use Illuminate\Support\Facades\DB;
+
 
 class SessionController extends Controller
 {

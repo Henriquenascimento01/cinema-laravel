@@ -31,7 +31,7 @@ class RoomController extends Controller
             return redirect('/rooms');
         } catch (\PDOException) {
 
-            return back()->with('msg-error', 'Sala já existente');
+            return back()->with('msg-error', 'Ops, algo de errado ocorreu');
         }
     }
 
@@ -57,7 +57,7 @@ class RoomController extends Controller
             return redirect()->route('rooms-index');
         } catch (\PDOException) {
 
-            return back()->with('msg-error', 'Algo inesperado ocorreu');
+            return back()->with('msg-error', 'Ops, algo de errado ocorreu');
         }
     }
 
@@ -68,6 +68,7 @@ class RoomController extends Controller
 
             return redirect()->route('rooms-index');
         } catch (\PDOException) {
+
             return back()->with('msg-error', 'Sala vinculada à uma sessão');
         }
     }
