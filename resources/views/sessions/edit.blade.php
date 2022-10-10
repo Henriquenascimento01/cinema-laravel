@@ -28,7 +28,7 @@
             <div class="form-group">
                 <label for="image">Banner:</label>
                 <input type="file" class="form-control-file" id="image" name="image">
-                <img src= "/img/movies/{{ $sessions->image }}" alt="banner" class="img-preview">
+                <img src="/img/movies/{{ $sessions->image }}" alt="banner" class="img-preview">
             </div>
 
             <div class="form-group">
