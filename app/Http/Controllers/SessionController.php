@@ -35,9 +35,11 @@ class SessionController extends Controller
     }
 
 
-
     public function store(ValidateFormSessionCreate $request)
     {
+        if ($request->room_id == "room_id" || $request->movie_id == "movie_id") {
+            return back()->with('msg-error', 'Campos ID da sala e filme são obrigatórios');
+        }
 
         try {
             Session::store($request);
@@ -74,6 +76,10 @@ class SessionController extends Controller
 
     public function update(ValidateFormSessionCreate $request, $id)
     {
+        if ($request->room_id == "room_id" || $request->movie_id == "movie_id") {
+            return back()->with('msg-error', 'Campos ID da sala e filme são obrigatórios');
+        }
+
         try {
             Session::alter($request, $id);
             return redirect('/')->with('msg-sucess-edit', 'Sessão alterada com sucesso');

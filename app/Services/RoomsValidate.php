@@ -17,8 +17,9 @@ class RoomsValidate
 
     public static function usedRoom(ValidateFormSessionCreate $request)
     {
-
-        // sessões existentes no banco
+        if ($request->_method == 'PUT') {
+            return false;
+        }
 
         $registredSessions = Session::where('date', $request->date)
             ->where('room_id', $request->room_id)

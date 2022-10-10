@@ -29,7 +29,6 @@
 
                 <ul class="navbar-nav">
 
-
                     @guest
                         <li class="nav-item">
                             <a href="/" class="nav-link">Inicio</a>
@@ -40,6 +39,9 @@
                         <li class="nav-item">
                             <a href="{{ route('login-form') }}" class="nav-link">Entrar</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('all-sessions') }}" class="nav-link">Todas sessões</a>
+                        </li>
                     @endguest
 
                     @auth
@@ -47,13 +49,19 @@
                             <a href="/" class="nav-link">Inicio</a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('all-sessions') }}" class="nav-link">Todas sessões</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('rooms-index') }}" class="nav-link">Salas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('movies-index') }}" class="nav-link">Filmes</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('sessions-create') }}" class="nav-link">Criar sessão</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('movies-create') }}" class="nav-link">Cadastrar filme</a>
+                            <a href="{{ route('movies-create') }}" class="nav-link">Criar filme</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('rooms-create') }}" class="nav-link">Criar sala</a>

@@ -61,6 +61,7 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/login', [AuthenticationController::class, 'login'])->name('login-form');
 Route::post('/login', [AuthenticationController::class, 'logar'])->name('login');
+Route::get('/allsessions', [HomeController::class, 'allSessions'])->name('all-sessions');
 
 
 Route::fallback(function () {
