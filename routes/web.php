@@ -23,13 +23,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [HomeController::class, 'index'])->name('index');
-    Route::get('/search', [HomeController::class, 'search'])->name('search');
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 });
 
 Route::prefix('movies')->group(function () {
-    Route::get('/', [MovieController::class, 'index'])->name('movies-index')->middleware('auth');
+    Route::get('/', [MovieController::class, 'index'])->name('movies-index');
     Route::get('/{id}/edit', [MovieController::class, 'edit'])->where('id', '[0-9]+')->name('movies-edit')->middleware('auth');
     Route::get('/create', [MovieController::class, 'create'])->name('movies-create')->middleware('auth');
     Route::delete('/{id}', [MovieController::class, 'destroy'])->where('id', '[0-9]+')->name('movies-destroy')->middleware('auth');
@@ -52,9 +50,12 @@ Route::prefix('/sessions')->group(function () {
     Route::delete('/{id}', [SessionController::class, 'destroy'])->where('id', '[0-9]+')->name('sessions-destroy')->middleware('auth');
     Route::post('/', [SessionController::class, 'store'])->name('sessions-store')->middleware('auth');
     Route::put('/{id}', [SessionController::class, 'update'])->name('sessions-update')->middleware('auth')->middleware('auth');
-    Route::get('/show/{id}', [SessionController::class, 'show'])->name('sessions-show')->middleware('auth');
+    Route::get('/show/{id}', [SessionController::class, 'show'])->name('sessions-show');
 });
 
+
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 //Autentication
 

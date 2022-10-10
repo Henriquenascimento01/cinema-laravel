@@ -19,6 +19,7 @@
                     </p>
                     <p class="session-room">Sala: {{ $sessions->room->number }}</p>
                     <p class="session-tag">Gênero: {{ $sessions->movie->tag }}</p>
+                    <p class="session-classification">Classificação: {{ $sessions->movie->classification }}</p>
                 </div>
                 <div class="col-md-12" id="description-container">
                     <h3>Descrição</h3>

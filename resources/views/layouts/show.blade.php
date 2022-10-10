@@ -32,13 +32,16 @@
                         </p>
                         <a href="{{ route('sessions-show', ['id' => $movie->id]) }}" class="btn btn-info">Mais
                             informações</a>
-                        <a href="{{ route('sessions-edit', ['id' => $movie->id]) }}" class="btn btn-warning">Editar</a>
-                        <form action="{{ route('sessions-destroy', ['id' => $movie->id]) }}" method="POST"
-                            class="form-group">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger mt-2">Apagar</button>
-                        </form>
+
+                        @auth
+                            <a href="{{ route('sessions-edit', ['id' => $movie->id]) }}" class="btn btn-warning">Editar</a>
+                            <form action="{{ route('sessions-destroy', ['id' => $movie->id]) }}" method="POST"
+                                class="form-group">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger mt-2">Apagar</button>
+                            </form>
+                        @endauth
                     </div>
                 </div>
             @endforeach

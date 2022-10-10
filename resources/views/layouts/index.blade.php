@@ -33,6 +33,8 @@
                             {{ \Carbon\Carbon::parse($session['time_finish'])->format('H:i') }}</p>
                         <a href="{{ route('sessions-show', ['id' => $session->id]) }}" class="btn btn-info">Mais
                             informações</a>
+                        
+                        @auth
                         <a href="{{ route('sessions-edit', ['id' => $session->id]) }}" class="btn btn-warning">Editar</a>
                         <form action="{{ route('sessions-destroy', ['id' => $session->id]) }}" method="POST"
                             class="form-group">
@@ -40,6 +42,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger mt-2">Apagar</button>
                         </form>
+                        @endauth
                     </div>
                 </div>
             @endforeach

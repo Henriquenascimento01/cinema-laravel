@@ -57,7 +57,11 @@
                         <div class="form-group mt-3">
                             <div class="col-md-6 offset-md-3">
                                 <input type="submit" value="Login" class="btn btn-primary">
-
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <div class="col-md-6 offset-md-3">
+                                <a class="btn btn-primary" href=" {{ route('index') }}">Voltar</a>
                             </div>
                         </div>
                     </form>
