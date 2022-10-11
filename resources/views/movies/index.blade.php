@@ -8,12 +8,7 @@
 
     <main>
         <div class="container-fluid">
-            <div class="mt-5">
-                @if (session('msg-error'))
-                    <div class="alert alert-danger" role="alert">
-                        <p class="msg">{{ session('msg-error') }}</p>
-                    </div>
-                @endif
+           
                 @yield('content')
             </div>
         </div>

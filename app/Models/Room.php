@@ -55,7 +55,7 @@ class Room extends Model
         $room = Room::findOrFail($id);
 
         if (!$room->sessions()->get()->isEmpty()) {
-            return back()->with('msg-error', 'Sala vinculada à uma sessão');
+            //return back()->with('msg-error', 'Sala vinculada à uma sessão');
         }
 
         $room->delete();

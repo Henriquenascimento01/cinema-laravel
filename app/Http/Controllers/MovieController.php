@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
-use Illuminate\Cache\RedisTaggedCache;
-use App\Models\Room;
 use App\Http\Requests\ValidateFormMoviesCreate;
 
 class MovieController extends Controller
@@ -37,7 +35,7 @@ class MovieController extends Controller
     }
 
     public function edit($id)
-    {
+    { 
         $movies = Movie::where('id', $id)->first();
 
         if (!empty($movies)) {

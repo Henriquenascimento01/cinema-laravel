@@ -9,7 +9,7 @@
     <div id="search-container" class="col md-12">
         <h1>Busque por um filme</h1>
         <form action="{{ route('search') }}" method="get">
-            @csrf
+            
             <input type="text" id="search" name="search" class="form-control" placeholder="Buscar filme">
         </form>
     </div>

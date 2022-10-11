@@ -90,16 +90,10 @@
                         <p class="msg">{{ session('msg-error') }}</p>
                     </div>
                 @endif
-                @if (session('msg-sucess'))
-                    <div class="alert alert-secondary" role="alert">
-                        <p class="msg">{{ session('msg-sucess') }}</p>
-                    </div>
-                @endif
                 @yield('content')
             </div>
         </div>
     </main>
-
     <footer>
         <p>Cinema &copy; 2022</p>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
