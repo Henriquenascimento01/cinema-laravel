@@ -90,6 +90,11 @@
                         <p class="msg">{{ session('msg-error') }}</p>
                     </div>
                 @endif
+                @if (session('msg-sucess'))
+                    <div class="alert alert-secondary" role="alert">
+                        <p class="msg">{{ session('msg-sucess') }}</p>
+                    </div>
+                @endif
                 @yield('content')
             </div>
         </div>

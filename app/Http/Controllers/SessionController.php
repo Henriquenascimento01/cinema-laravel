@@ -80,17 +80,22 @@ class SessionController extends Controller
 
         try {
             Session::alter($request, $id);
-            return redirect('/')->with('msg-sucess-edit', 'Sessão alterada com sucesso');
+            return redirect('/')->with('msg-sucess', 'Sessão alterada com sucesso');
         } catch (\PDOException) {
 
-            return back()->with('msg-error', 'Algo inesperado ocorreu');
+            return back()->with('msg-error', 'Ops algo inesperado ocorreu');
         }
     }
 
     public function destroy($id)
     {
-        Session::where('id', $id)->delete();
+        try {
+            Session::where('id', $id)->delete();
 
-        return redirect()->route('index');
+            return back()->with('msg-sucess', 'Sessão apagada com sucesso!');
+        } catch (\PDOException) {
+
+            return back()->with('msg-error', 'Ops, algo de inesperado ocorreu');
+        }
     }
 }

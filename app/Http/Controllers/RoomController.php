@@ -28,7 +28,7 @@ class RoomController extends Controller
         try {
             Room::store($request);
 
-            return redirect('/rooms');
+            return redirect('/rooms')->with('msg-sucess', 'Sala criada com sucesso!');
         } catch (\PDOException) {
 
             return back()->with('msg-error', 'Ops, algo de errado ocorreu');
@@ -54,7 +54,7 @@ class RoomController extends Controller
         try {
             Room::alter($request, $id);
 
-            return redirect()->route('rooms-index');
+            return redirect('/rooms')->with('msg-sucess', 'Sala alterada com sucesso');
         } catch (\PDOException) {
 
             return back()->with('msg-error', 'Ops, algo de errado ocorreu');
@@ -66,7 +66,7 @@ class RoomController extends Controller
         try {
             Room::destroy($id);
 
-            return redirect()->route('rooms-index');
+            return back()->with('msg-sucess', 'Sala apagada com sucesso');
         } catch (\PDOException) {
 
             return back()->with('msg-error', 'Sala vinculada à uma sessão');

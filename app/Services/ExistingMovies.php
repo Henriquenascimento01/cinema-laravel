@@ -12,6 +12,9 @@ class ExistingMovies
 
     public static function checkRepeated(ValidateFormMoviesCreate $request)
     {
+        if ($request->_method == 'PUT') {
+            return false;
+        }
 
         $movies = Movie::all();
 

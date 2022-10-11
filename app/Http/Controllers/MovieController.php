@@ -29,7 +29,7 @@ class MovieController extends Controller
         try {
             Movie::store($request);
 
-            return redirect('/')->with('msg-sucess', 'Filme cadastrado com sucesso!');
+            return redirect('/movies')->with('msg-sucess', 'Filme cadastrado com sucesso!');
         } catch (\PDOException) {
 
             return back()->with('msg-error', "Algo inesperado ocorreu");
@@ -52,7 +52,7 @@ class MovieController extends Controller
         try {
             Movie::alter($request, $id);
 
-            return redirect('/')->with('msg-sucess-edit', 'Filme alterado com sucesso');
+            return redirect('/movies')->with('msg-sucess', 'Filme alterado com sucesso!');
         } catch (\PDOException) {
             return back()->with('msg-error', "Algo inesperado ocorreu");
         }
@@ -63,7 +63,7 @@ class MovieController extends Controller
         try {
             Movie::destroy($id);
 
-            return redirect()->route('movies-index');
+            return back()->with('msg-sucess', 'Filme apagado com sucesso!');
         } catch (\PDOException) {
             return back()->with('msg-error', 'Filme vinculado à uma sessão');
         }
