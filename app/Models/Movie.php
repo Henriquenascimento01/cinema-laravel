@@ -74,10 +74,6 @@ class Movie extends Model
 
         $room = Movie::findOrFail($id);
 
-        if (!$room->sessions()->get()->isEmpty()) {
-            //return back()->with('msg-error', 'Filme vinculado à uma sessão');
-        }
-
         $room->delete();
     }
 }

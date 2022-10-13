@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\DB;
 class Search
 {
 
-    public static function movies(string $request)
+    public static function movies($request)
     {
+
 
         try {
             $movies = DB::table('movies')
@@ -32,7 +33,7 @@ class Search
 
             return $movies;
         } catch (\PDOException $e) {
-            dd($e->getMessage());
+            $e->getMessage();
         }
-    }       
+    }
 }

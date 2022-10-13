@@ -46,23 +46,4 @@ class RoomsValidate
 
         return false;
     }
-
-
-    // verifica se a sala está em limpeza antes de cadastrar uma nova sessão
-
-    // public static function cleaning(ValidateFormSessionCreate $request){
-
-    //     // sessões registradas no banco
-
-    //     $sessions = Session::where('date', $request->date)
-    //     ->where('room_id', $request->room_id)
-    //     ->get()->all();
-
-    //     foreach($sessions as $session){
-
-    //         if($session->rooms->number == $request->room_id ){
-
-    //         }
-    //     }
-    // }
 }

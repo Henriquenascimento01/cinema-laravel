@@ -29,9 +29,19 @@ class RoomController extends Controller
             Room::store($request);
 
             return redirect('/rooms')->with('msg-sucess', 'Sala criada com sucesso!');
-        } catch (\PDOException) {
+        } catch (\PDOException $e) {
 
-            return back()->with('msg-error', 'Ops, algo de errado ocorreu');
+            if ($e->getCode() == 23000) {
+
+                return back()->with('msg-error', 'A sala já existe');
+            }
+            if ($e->getCode() == "HY000") {
+
+                return back()->with('msg-error', 'Por favor insira somente números');
+            } else {
+
+                return back()->with('msg-error', 'Erro ao criar a sala');
+            }
         }
     }
 
@@ -55,9 +65,19 @@ class RoomController extends Controller
             Room::alter($request, $id);
 
             return redirect('/rooms')->with('msg-sucess', 'Sala alterada com sucesso');
-        } catch (\PDOException) {
+        } catch (\PDOException $e) {
 
-            return back()->with('msg-error', 'Ops, algo de errado ocorreu');
+            if ($e->getCode() == 23000) {
+
+                return back()->with('msg-error', 'A sala já existe');
+            }
+            if ($e->getCode() == "HY000") {
+
+                return back()->with('msg-error', 'Por favor insira somente números');
+            } else {
+
+                return back()->with('msg-error', 'Erro ao atualizar a sala');
+            }
         }
     }
 

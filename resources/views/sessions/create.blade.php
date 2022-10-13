@@ -24,7 +24,7 @@
 
             <div class="form-group">
                 <label for="image">Banner:</label>
-                <input type="file" class="form-control-file" id="image" name="image">
+                <input type="file" class="form-control-file" id="image" name="image" value="{{ old('image') }}">
             </div>
 
             <div class="form-group">

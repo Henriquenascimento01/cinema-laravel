@@ -28,6 +28,7 @@ class Room extends Model
     {
         return Room::all();
     }
+    
 
     public static function store(ValidateFormRoomsCreate $request)
     {
@@ -39,9 +40,9 @@ class Room extends Model
         $rooms->save();
     }
 
+
     public static function alter(ValidateFormRoomsCreate $request, $id)
     {
-
         $data = [
             'number' => $request->number
         ];
@@ -49,14 +50,10 @@ class Room extends Model
         Room::where('id', $id)->update($data);
     }
 
+
     public static function destroy($id)
     {
-
         $room = Room::findOrFail($id);
-
-        if (!$room->sessions()->get()->isEmpty()) {
-            //return back()->with('msg-error', 'Sala vinculada à uma sessão');
-        }
 
         $room->delete();
     }

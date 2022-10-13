@@ -34,14 +34,12 @@
                             <a href="/" class="nav-link">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('movies-index') }}" class="nav-link">Filmes</a>
+                            <a href="{{ route('all-sessions') }}" class="nav-link">Sessões</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('login-form') }}" class="nav-link">Entrar</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('all-sessions') }}" class="nav-link">Todas sessões</a>
-                        </li>
+
                     @endguest
 
                     @auth
@@ -49,7 +47,7 @@
                             <a href="/" class="nav-link">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('all-sessions') }}" class="nav-link">Todas sessões</a>
+                            <a href="{{ route('all-sessions') }}" class="nav-link">Sessões</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('rooms-index') }}" class="nav-link">Salas</a>
