@@ -12,13 +12,22 @@ class ExistingMovies
 
     public static function checkRepeated(ValidateFormMoviesCreate $request)
     {
-        if ($request->_method == 'PUT') {
-            return false;
-        }
-
+        
         $movies = Movie::all();
 
+        if ($request->_method == "PUT") {
+
+            foreach ($movies as $movie) {
+
+                if (Str::lower($request->name) == Str::lower($movie->name)) {
+                    return true;
+                }
+                return false;
+            }
+        }
+
         foreach ($movies as $movie) {
+
             if (Str::lower($request->name) == Str::lower($movie->name)) {
                 return true;
             }
@@ -26,4 +35,3 @@ class ExistingMovies
         return false;
     }
 }
-
