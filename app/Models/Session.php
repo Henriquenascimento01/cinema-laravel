@@ -42,27 +42,30 @@ class Session extends Model
 
     public static function store(ValidateFormSessionCreate $request)
     {
-       // dd(RoomsWithSessionsOrdered::get()); 
+        //dd(RoomsWithSessionsOrdered::get()); 
 
-        if (ValidationServices::validAll($request)) {
-            return back();
-        }
+        $messageError = ValidationServices::validAll($request);
 
-        $sessions = new Session;
+       // dd($messageError); 
 
-        $sessions->date = $request->date;
-        $sessions->time_initial = $request->time_initial;
-        $sessions->time_finish = $request->time_finish;
-        $sessions->room_id = $request->room_id;
-        $sessions->movie_id = $request->movie_id;
+        if ($messageError === false) {
 
-        $sessions->save();
+            $sessions = new Session;
+
+            $sessions->date = $request->date;
+            $sessions->time_initial = $request->time_initial;
+            $sessions->time_finish = $request->time_finish;
+            $sessions->room_id = $request->room_id;
+            $sessions->movie_id = $request->movie_id;
+
+            $sessions->save();
+        }   return $messageError; 
     }
 
 
     public static function alter(ValidateFormSessionCreate $request, $id)
-    {   
-        
+    {
+
 
         if (ValidationServices::validAll($request)) {
             return redirect('/sessions/create');

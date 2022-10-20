@@ -35,24 +35,23 @@ class SessionController extends Controller
             'sessions' => $sessions
         ]);
     }
-    
+
 
 
     public function store(ValidateFormSessionCreate $request)
     {
 
+
         if ($request->room_id == "room_id" || $request->movie_id == "movie_id") {
             return back()->with('msg-error', 'Campos ID da sala e filme são obrigatórios');
         }
 
-        try {
-            //dd('entrou aqui');
-            Session::store($request);
+        $response = Session::store($request);
 
+        if ($response) {
+            return back()->with('msg-error', $response);
+        } else {
             return redirect('/')->with('msg-sucess', 'Sessão criada com sucesso!');
-        } catch (\PDOException) {
-
-            return back()->withErrors('msg-error', 'Sala usada');
         }
     }
 

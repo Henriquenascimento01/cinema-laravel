@@ -9,6 +9,12 @@
     <div id="movie-create-container" class="col-md-6 offset-md-3">
         <h1>Cadastrar sessão</h1>
 
+        @if (session('msg-error'))
+            <div class="alert alert-danger" role="alert">
+                <p class="msg">{{ session('msg-error') }}</p>
+            </div>
+        @endif
+
 
         @if ($errors->any())
             <ul class="error">
@@ -47,18 +53,6 @@
                     @endforeach
                 </select>
             </div>
-
-            {{-- @foreach ($movies as $movie)
-                <div id="cards-container" class="row mt-5">
-                    <img src="/img/movies/{{ $movie->image }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $movie->name }}</h5>
-                        <p class="card-duration">{{ \Carbon\Carbon::parse($movie['duration'])->format('H:i') }}</p>
-                        <p class="card-duration">Classificação indicativa</p>
-                        <p class="card-duration">Genero</p>
-                    </div>
-                </div>
-            @endforeach --}}
 
             <div class="form-group">
                 <label for="name">Filme:</label>

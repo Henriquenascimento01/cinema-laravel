@@ -20,17 +20,19 @@ class RoomsValidate
     {
         return Session::where('date', $request->date)
             ->where('room_id', $request->room_id)
-            ->get()->all();
+            ->orderBy('time_initial')
+            ->get();
     }
 
     // verifica se a sala já está em uso antes de criar/editar uma nova sessão
     public static function usedRoom(ValidateFormSessionCreate $request)
     {
-        if ($request->_method == 'PUT') {
-            return false;
-        }
+        // if ($request->_method == 'PUT') {
+        //     return false;
+        // }
 
-        $registredSessions = RoomsValidate::roomsInSession($request);
+        $registredSessions = RoomsValidate::roomsInSession($request)->toArray();
+
 
         $sessionInit = new DateTime($request->date . $request->time_initial, new DateTimeZone('America/Sao_Paulo'));
         $sessionFinish = new DateTime($request->date . $request->time_finish, new DateTimeZone('America/Sao_Paulo'));
@@ -38,21 +40,34 @@ class RoomsValidate
         $sessionInit = $sessionInit->format('H:i:s');
         $sessionFinish = $sessionFinish->format('H:i:s');
 
-
         foreach ($registredSessions as $session) {
 
 
-            if ($sessionInit == $session->time_initial && $sessionFinish == $session->time_finish) {
+            // se o horário de inicio e término já existem
+            if ($sessionInit == $session['time_initial'] && $sessionFinish == $session['time_finish']) {
+
                 return true;
             }
 
-            if ($sessionInit > $session->time_initial && $sessionFinish < $session->time_finish) {
+
+            // se o horário de inicio e término da requisição forem entre a alguma sessão cadastrada
+            if ($sessionInit >= $session['time_initial']) {
+
+                if ($sessionInit <= $session['time_finish']) {
+                    return true;
+                }
+            } else if ($session['time_finish'] <= $sessionFinish) {
+                return true;
+            }
+
+            if ($sessionFinish >= $session['time_initial'] && $sessionFinish <= $session['time_finish']) {
+
                 return true;
             }
         }
-
         return false;
     }
+
 
     // Verifica se a sala está em tempo de limpeza no momento de criar uma nova sessão
     public static function clearning(ValidateFormSessionCreate $request)
@@ -77,26 +92,5 @@ class RoomsValidate
                 }
             }
         }
-    }
-
-
-
-
-    public static function existing(ValidateFormRoomsCreate $request)
-    {
-
-        $roomAdded = $request->number;
-
-        $rooms =  Room::all();
-
-        foreach ($rooms as $room) {
-
-            if (Str::lower($roomAdded) == Str::lower($room->number)) {
-
-                return true;
-            }
-        }
-
-        return false;
     }
 }

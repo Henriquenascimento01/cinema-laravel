@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Requests\ValidateFormMoviesCreate;
+use App\Services\CheckExistingItems;
 use App\Services\ExistingMovies;
 
 class Movie extends Model
@@ -49,7 +50,7 @@ class Movie extends Model
     public static function store(ValidateFormMoviesCreate $request)
     {   //dd($request); 
 
-        if (ExistingMovies::checkRepeated($request)) {
+        if (CheckExistingItems::movies($request)) {
             return back()->with('msg-error', 'Filme já cadastrado');
         }
 
@@ -80,7 +81,7 @@ class Movie extends Model
     public static function alter(ValidateFormMoviesCreate $request, $id)
     {
 
-        if (ExistingMovies::checkRepeated($request)) {
+        if (CheckExistingItems::movies($request)) {
             return back()->with('msg-error', 'Filme já cadastrado');
         }
 

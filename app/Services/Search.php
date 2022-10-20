@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Search
 {
-
+    
     public static function movies($request)
     {
         $date = str_replace('/', '-', $request);

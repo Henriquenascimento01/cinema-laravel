@@ -28,6 +28,7 @@ class ValidateFormSessionCreate extends FormRequest
             'time_initial' => 'required',
             'time_finish' => 'required',
             'room_id' => 'required',
+            'movie_id' => 'required'
 
         ];
     }
@@ -40,6 +41,7 @@ class ValidateFormSessionCreate extends FormRequest
             'time_initial' => 'Horário de inicio é obrigatório',
             'time_finish' => 'Horário de termino é obrigatório',
             'room_id' => 'A sala de transmissão é obrigatória',
+            'movie_id' => 'O filme é obrigatório'
 
         ];
     }

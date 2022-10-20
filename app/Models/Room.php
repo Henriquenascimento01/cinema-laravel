@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidateFormRoomsCreate;
+use App\Services\CheckExistingItems;
 
 class Room extends Model
 {
@@ -32,7 +33,8 @@ class Room extends Model
 
     public static function store(ValidateFormRoomsCreate $request)
     {
-        if (RoomsValidate::existing($request)) {
+        if (CheckExistingItems::rooms($request)) {
+
             return back()->with('msg-error', 'Sala já existente');
         };
 
@@ -46,8 +48,8 @@ class Room extends Model
 
     public static function alter(ValidateFormRoomsCreate $request, $id)
     {
-        if (RoomsValidate::existing($request)) {
-            
+        if (CheckExistingItems::rooms($request)) {
+
             return back()->with('msg-error', 'Sala já existente');
         };
 
