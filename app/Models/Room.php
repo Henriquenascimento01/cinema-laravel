@@ -28,10 +28,13 @@ class Room extends Model
     {
         return Room::all();
     }
-    
+
 
     public static function store(ValidateFormRoomsCreate $request)
     {
+        if (RoomsValidate::existing($request)) {
+            return back()->with('msg-error', 'Sala já existente');
+        };
 
         $rooms = new Room;
 
@@ -43,6 +46,12 @@ class Room extends Model
 
     public static function alter(ValidateFormRoomsCreate $request, $id)
     {
+        if (RoomsValidate::existing($request)) {
+            
+            return back()->with('msg-error', 'Sala já existente');
+        };
+
+
         $data = [
             'number' => $request->number
         ];

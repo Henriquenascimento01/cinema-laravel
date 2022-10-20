@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Http\Requests\ValidateFormMoviesCreate;
+use App\Models\Classification;
+use App\Models\Tag;
 
 class MovieController extends Controller
 {
@@ -19,7 +21,13 @@ class MovieController extends Controller
 
     public function create()
     {
-        return view('movies.create');
+        $tags = Tag::all();
+        $classifications = Classification::all();
+
+        return view('movies.create', [
+            'tags' => $tags,
+            'classifications' => $classifications
+        ]);
     }
 
     public function store(ValidateFormMoviesCreate $request)
@@ -28,14 +36,14 @@ class MovieController extends Controller
             Movie::store($request);
 
             return redirect('/movies')->with('msg-sucess', 'Filme cadastrado com sucesso!');
-        } catch (\PDOException) {
+        } catch (\PDOException $e) {
 
             return back()->with('msg-error', "Algo inesperado ocorreu");
         }
     }
 
     public function edit($id)
-    { 
+    {
         $movies = Movie::where('id', $id)->first();
 
         if (!empty($movies)) {

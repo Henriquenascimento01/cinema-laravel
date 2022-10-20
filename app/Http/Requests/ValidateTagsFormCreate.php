@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidateFormSessionCreate extends FormRequest
+class ValidateTagsFormCreate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,23 +24,14 @@ class ValidateFormSessionCreate extends FormRequest
     public function rules()
     {
         return [
-            'date' => 'required',
-            'time_initial' => 'required',
-            'time_finish' => 'required',
-            'room_id' => 'required',
-
+            'name' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-
-            'date' => 'Campo data é obrigatório',
-            'time_initial' => 'Horário de inicio é obrigatório',
-            'time_finish' => 'Horário de termino é obrigatório',
-            'room_id' => 'A sala de transmissão é obrigatória',
-
+            'name' => 'Campo obrigatório'
         ];
     }
 }

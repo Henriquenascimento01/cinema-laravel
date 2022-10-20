@@ -56,13 +56,10 @@
                             <a href="{{ route('movies-index') }}" class="nav-link">Filmes</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('sessions-create') }}" class="nav-link">Criar sessão</a>
+                            <a href="{{ route('classifications-index') }}" class="nav-link">Classificações</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('movies-create') }}" class="nav-link">Criar filme</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('rooms-create') }}" class="nav-link">Criar sala</a>
+                            <a href="{{ route('tags-index') }}" class="nav-link">Gêneros</a>
                         </li>
 
                         <li class="nav-item">
@@ -89,6 +86,7 @@
                     </div>
                 @endif
                 @yield('content')
+
             </div>
         </div>
     </main>

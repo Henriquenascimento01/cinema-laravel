@@ -8,7 +8,7 @@
 
     <div id="movie-create-container" class="col-md-6 offset-md-3">
         <h1>Editar sessão</h1>
-        <form action="{{ route('sessions-update', ['id' => $sessions->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('sessions-update', ['id' => $sessions->id]) }}" method="POST">
             @csrf
             @method('PUT')
             @if ($errors->any())
@@ -25,11 +25,6 @@
                     {{ session('msg') }}
                 </div>
             @endif
-            <div class="form-group">
-                <label for="image">Banner:</label>
-                <input type="file" class="form-control-file" id="image" name="image">
-                <img src="/img/movies/{{ $sessions->image }}" alt="banner" class="img-preview">
-            </div>
 
             <div class="form-group">
                 <label for="date">Data:</label>
@@ -68,7 +63,7 @@
                 </select>
 
             </div>
-            <input type="submit" class="btn btn-success" value="Cadastrar">
+            <input type="submit" class="btn btn-success" value="Editar">
         </form>
     </div>
 @endsection

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 
-@section('title', 'Salas')
+@section('title', 'Gêneros')
 
 
 @section('content')
@@ -11,23 +11,26 @@
             <div class="mt-5">
 
                 @yield('content')
-                <a href="{{ route('rooms-create') }}" class="btn btn-success">Criar sala</a>
+                <a href="{{ route('tags-create') }}" class="btn btn-success mt-5">Criar gêneros</a>
             </div>
         </div>
     </main>
     <table class="table mt-5">
+
         <thead>
             <tr class="rooms-index-title">
-                <th scope="col">Número</th>
+                <th scope="col">Titulo</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($rooms as $room)
+            @foreach ($tags as $tag)
                 <tr class="rooms-index-list">
-                    <th scope="row">{{ $room->number }}</th>
+                    <th scope="row">{{ $tag->name }}</th>
                     <td>
-                        <a href="{{ route('rooms-edit', ['id' => $room->id]) }}" class="btn btn-warning">Editar</a>
-                        <form action="{{ route('rooms-destroy', ['id' => $room->id]) }}" method="POST" class="form-group">
+                        <a href="{{ route('tags-edit', ['id' => $tag->id]) }}"
+                            class="btn btn-warning">Editar</a>
+                        <form action="{{ route('tags-destroy', ['id' => $tag->id]) }}" method="POST"
+                            class="form-group">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger mt-2">Apagar</button>

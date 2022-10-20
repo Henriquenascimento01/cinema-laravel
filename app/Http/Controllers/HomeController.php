@@ -10,8 +10,9 @@ use App\Models\Session;
 
 class HomeController extends Controller
 {
+    // retorna as sessões com base no filtro proposto ( utilizado para visualização inicial do visitante )
     public function index()
-    {
+    {   
         $sessions = FilterSessions::latest();
 
         return view('layouts.index', [
@@ -31,10 +32,10 @@ class HomeController extends Controller
 
     public function search(Request $request) // tratar request antes de mandar para outras camadas
     {
-        $search = Search::movies(Str::lower($request->search));
+        $sessions = Search::movies(Str::lower($request->search));
 
         return view('layouts.show', [
-            'movies' => $search
+            'sessions' => $sessions
         ]);
     }
 }

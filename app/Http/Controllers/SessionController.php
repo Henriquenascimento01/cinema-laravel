@@ -10,6 +10,10 @@ use App\Http\Requests\ValidateFormSessionCreate;
 
 class SessionController extends Controller
 {
+    public function index()
+    {
+        return view('sessions.index');
+    }
 
     public function create()
     {
@@ -31,15 +35,18 @@ class SessionController extends Controller
             'sessions' => $sessions
         ]);
     }
+    
 
 
     public function store(ValidateFormSessionCreate $request)
     {
+
         if ($request->room_id == "room_id" || $request->movie_id == "movie_id") {
             return back()->with('msg-error', 'Campos ID da sala e filme são obrigatórios');
         }
 
         try {
+            //dd('entrou aqui');
             Session::store($request);
 
             return redirect('/')->with('msg-sucess', 'Sessão criada com sucesso!');
@@ -75,6 +82,7 @@ class SessionController extends Controller
     public function update(ValidateFormSessionCreate $request, $id)
     {
         if ($request->room_id == "room_id" || $request->movie_id == "movie_id") {
+
             return back()->with('msg-error', 'Campos ID da sala e filme são obrigatórios');
         }
 

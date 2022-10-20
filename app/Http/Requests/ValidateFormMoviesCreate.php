@@ -27,8 +27,10 @@ class ValidateFormMoviesCreate extends FormRequest
 
             'name' => 'required',
             'description' => 'required',
-            'tag' => 'required',
-            'classification' => 'required'
+            'classification_id' => 'required',
+            'tag_id' => 'required',
+            'image' => 'required',
+            'duration' => 'required'
         ];
     }
 
@@ -37,9 +39,10 @@ class ValidateFormMoviesCreate extends FormRequest
         return [
             'name' => 'O titulo é obrigatório.',
             'description' => 'A descrição é obrigatória.',
-            'tag' => 'O gênero é obrigatório',
-            'classification' => 'A classificação é obrigatória.'
-
+            'tag_id' => 'O gênero é obrigatório',
+            'classification_id' => 'A classificação é obrigatória.',
+            'image' => 'A imagem é obrigatória.',
+            'duration' => 'Tempo de duração é obrigatório',
         ];
     }
 }

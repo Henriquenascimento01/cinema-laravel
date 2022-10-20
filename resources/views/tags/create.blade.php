@@ -1,15 +1,15 @@
 @extends('layouts.main')
 
 
-@section('title', 'Cadastrar sala')
+@section('title', 'Cadastrar gênero')
 
 
 @section('content')
 
     <div id="movie-create-container" class="col-md-4 offset-md-3">
-        <h1>Criar sala de transmissão</h1>
-        
-        <form action="{{ route('rooms-store') }}" method="POST" class="mt-5">
+        <h1>Criar gênero</h1>
+
+        <form action="{{ route('tags-store') }}" method="POST">
             @csrf
             @if ($errors->any())
                 <ul class="error">
@@ -21,8 +21,9 @@
                 </ul>
             @endif
             <div class="form-group">
-                <label for="number">Sala de transmissão:</label>
-                <input type="number" class="form-control" id="number" name="number" placeholder="Sala de transmissão" value="{{ old('number') }}">
+                <label for="text">Gênero:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Gênero"
+                    value="{{ old('name') }}">
             </div>
             <input type="submit" class="btn btn-success" value="Cadastrar">
         </form>

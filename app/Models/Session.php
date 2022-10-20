@@ -9,6 +9,7 @@ use App\Services\RoomsValidate;
 use App\Services\ValidatePastSessionDate;
 use App\Services\ValidateCineOpened;
 use App\Http\Requests\ValidateFormSessionCreate;
+use App\Services\RoomsWithSessionsOrdered;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\ValidateSessionDate;
 use App\Services\ValidationServices;
@@ -23,7 +24,7 @@ class Session extends Model
         'time_finish',
         'movie_id',
         'room_id',
-        'image'
+
     ];
 
 
@@ -38,8 +39,10 @@ class Session extends Model
     }
 
 
+
     public static function store(ValidateFormSessionCreate $request)
     {
+       // dd(RoomsWithSessionsOrdered::get()); 
 
         if (ValidationServices::validAll($request)) {
             return back();
@@ -53,28 +56,16 @@ class Session extends Model
         $sessions->room_id = $request->room_id;
         $sessions->movie_id = $request->movie_id;
 
-
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-
-            $requestImage = $request->image;
-
-            $extension = $requestImage->extension();
-
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
-            $requestImage->move(public_path('img/movies'), $imageName);
-
-            $sessions->image = $imageName;
-        }
-
         $sessions->save();
     }
 
 
     public static function alter(ValidateFormSessionCreate $request, $id)
-    {
+    {   
+        
+
         if (ValidationServices::validAll($request)) {
-            return back();
+            return redirect('/sessions/create');
         }
 
 
@@ -84,21 +75,8 @@ class Session extends Model
             'time_finish' => $request->time_finish,
             'movie_id' => $request->movie_id,
             'room_id' => $request->room_id,
-            'image' => $request->image
+
         ];
-
-        if ($request->hasFile('image')) {
-
-            $requestImage = $request->image;
-
-            $extension = $requestImage->extension();
-
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
-            $requestImage->move(public_path('img/movies'), $imageName);
-
-            $data['image'] = $imageName;
-        }
 
         Session::where('id', $id)->update($data);
     }

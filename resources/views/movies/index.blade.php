@@ -6,46 +6,35 @@
 
 @section('content')
 
-    <main>
-        <div class="container-fluid">
-           
-                @yield('content')
-            </div>
-        </div>
-    </main>
-    <table class="table">
-        <thead>
-            <tr class="movies-index-title">
-                <th scope="col">ID</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Classificação indicativa</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Gênero</th>
-            </tr>
-        </thead>
+    <div id="movie-container" class="col md-12">
+        <h2>Filmes cadastrados</h2>
+        <a href="{{ route('sessions-create') }}" class="btn btn-success mt-5">Criar sessão</a>
+        <a href="{{ route('movies-create') }}" class="btn btn-warning mt-5">Criar filme</a>
+        <div id="cards-container" class="row mt-5">
 
-        <tbody>
             @foreach ($movies as $movie)
-                <tr class="movies-index-list">
-                    <th scope="row">{{ $movie->id }}</th>
-                    <th scope="row">{{ $movie->name }}</th>
-                    <th scope="row">{{ $movie->classification }}</th>
-                    <th scope="row">{{ $movie->description }}</th>
-                    <th scope="row">{{ $movie->tag }}</th>
+            
+                <div class="col md-4">
+                    
+                    <img src="/img/movies/{{ $movie->image }}">
 
-                    <td>
-                        @auth
-                            <a href="{{ route('movies-edit', ['id' => $movie->id]) }}" class="btn btn-warning">Editar</a>
-                            <form action="{{ route('movies-destroy', ['id' => $movie->id]) }}" method="POST"
-                                class="form-group">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger mt-2">Apagar</button>
-                            </form>
-                        @endauth
-                    </td>
-                </tr>
+                    <div class="card-body">
+                        <h5 class="card-title">Titulo: {{ $movie->name }}</h5>
+                        <p class="card-duration">{{ \Carbon\Carbon::parse($movie['duration'])->format('H:i') }}</p>
+                        <p class="card-duration">Classificação: {{ $movie->classification->name }}</p>
+                        <p class="card-duration">Gênero: {{ $movie->tag->name }}</p>
+                        <a href="{{ route('movies-edit', ['id' => $movie->id]) }}" class="btn btn-warning">Editar</a>
+
+                        <form action="{{ route('movies-destroy', ['id' => $movie->id]) }}" method="POST"
+                            class="form-group">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger mt-2">Apagar</button>
+                        </form>
+
+                    </div>
+                </div>
             @endforeach
-        </tbody>
-    </table>
+        </div>
+    </div>
 @endsection

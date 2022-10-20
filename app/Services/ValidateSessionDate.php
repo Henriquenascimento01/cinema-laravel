@@ -10,7 +10,6 @@ use App\Services\CurrentDate;
 class ValidateSessionDate
 {
     // verifica se a data de criação da sessão é uma data passada
-
     public static function pastDate(ValidateFormSessionCreate $request): bool
     {
         date_default_timezone_set('America/Sao_Paulo');
@@ -26,8 +25,8 @@ class ValidateSessionDate
         return false;
     }
 
-    // verifica se o horário de inicio e termino da sessão são iguais
 
+    // verifica se o horário de inicio e termino da sessão são iguais
     public static function finishAndStart(ValidateFormSessionCreate $request)
     {
 
@@ -37,6 +36,19 @@ class ValidateSessionDate
         if ($sessionInit == $sessionFinish) {
             return true;
         }
+        return false;
+    }
+
+
+    // verifica se o horário de inicio é maior que o de finalização
+    public static function checkInverted(ValidateFormSessionCreate $request)
+    {
+
+        if ($request->time_finish < $request->time_initial) {
+
+            return true;
+        }
+
         return false;
     }
 }

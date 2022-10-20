@@ -15,9 +15,21 @@ class Movie extends Model
     protected $fillable = [
         'name',
         'description',
-        'tag',
-        'classification'
+        'duration',
+        'imagem',
+        'classification_id',
+        'tag_id'
     ];
+
+    public function classification()
+    {
+        return $this->belongsTo(Classification::class);
+    }
+
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
+    }
 
     public function sessions()
     {
@@ -29,12 +41,13 @@ class Movie extends Model
 
     public static function getAll()
     {
+        // dd(Movie::all());
         return Movie::all();
     }
 
 
     public static function store(ValidateFormMoviesCreate $request)
-    {
+    {   //dd($request); 
 
         if (ExistingMovies::checkRepeated($request)) {
             return back()->with('msg-error', 'Filme já cadastrado');
@@ -44,8 +57,22 @@ class Movie extends Model
 
         $movies->name = $request->name;
         $movies->description = $request->description;
-        $movies->tag = $request->tag;
-        $movies->classification = $request->classification;
+        $movies->duration = $request->duration;
+        $movies->classification_id = $request->classification_id;
+        $movies->tag_id = $request->tag_id;
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+            $requestImage = $request->image;
+
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $requestImage->move(public_path('img/movies'), $imageName);
+
+            $movies->image = $imageName;
+        }
 
         $movies->save();
     }
@@ -60,10 +87,24 @@ class Movie extends Model
         $data = [
             'name' => $request->name,
             'description' => $request->description,
-            'tag' => $request->tag,
-            'classification' => $request->classification
+            'duration' => $request->duration,
+            'tag_id' => $request->tag_id,
+            'classification_id' => $request->classification_id
 
         ];
+
+        if ($request->hasFile('image')) {
+
+            $requestImage = $request->image;
+
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $requestImage->move(public_path('img/movies'), $imageName);
+
+            $data['image'] = $imageName;
+        }
 
         Movie::where('id', $id)->update($data);
     }
