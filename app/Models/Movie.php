@@ -48,74 +48,80 @@ class Movie extends Model
 
 
     public static function store(ValidateFormMoviesCreate $request)
-    {   //dd($request); 
+    {  
+        $messageError = CheckExistingItems::movies($request);
 
-        if (CheckExistingItems::movies($request)) {
-            return back()->with('msg-error', 'Filme já cadastrado');
+        if ($messageError == false) {
+
+            $movies = new Movie;
+
+            $movies->name = $request->name;
+            $movies->description = $request->description;
+            $movies->classification_id = $request->classification_id;
+            $movies->tag_id = $request->tag_id;
+
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+                $requestImage = $request->image;
+
+                $extension = $requestImage->extension();
+
+                $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+                $requestImage->move(public_path('img/movies'), $imageName);
+
+                $movies->image = $imageName;
+            }
+
+            $movies->save();
         }
-
-        $movies = new Movie;
-
-        $movies->name = $request->name;
-        $movies->description = $request->description;
-        $movies->duration = $request->duration;
-        $movies->classification_id = $request->classification_id;
-        $movies->tag_id = $request->tag_id;
-
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-
-            $requestImage = $request->image;
-
-            $extension = $requestImage->extension();
-
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
-            $requestImage->move(public_path('img/movies'), $imageName);
-
-            $movies->image = $imageName;
-        }
-
-        $movies->save();
+        return $messageError;
     }
+
+
 
     public static function alter(ValidateFormMoviesCreate $request, $id)
     {
 
-        if (CheckExistingItems::movies($request)) {
-            return back()->with('msg-error', 'Filme já cadastrado');
+        $messageError = CheckExistingItems::movies($request);
+
+        if ($messageError == false) {
+
+            $data = [
+                'name' => $request->name,
+                'description' => $request->description,
+                'tag_id' => $request->tag_id,
+                'classification_id' => $request->classification_id
+
+            ];
+
+            if ($request->hasFile('image')) {
+
+                $requestImage = $request->image;
+
+                $extension = $requestImage->extension();
+
+                $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+                $requestImage->move(public_path('img/movies'), $imageName);
+
+                $data['image'] = $imageName;
+            }
+
+            Movie::where('id', $id)->update($data);
         }
-
-        $data = [
-            'name' => $request->name,
-            'description' => $request->description,
-            'duration' => $request->duration,
-            'tag_id' => $request->tag_id,
-            'classification_id' => $request->classification_id
-
-        ];
-
-        if ($request->hasFile('image')) {
-
-            $requestImage = $request->image;
-
-            $extension = $requestImage->extension();
-
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
-            $requestImage->move(public_path('img/movies'), $imageName);
-
-            $data['image'] = $imageName;
-        }
-
-        Movie::where('id', $id)->update($data);
+        return $messageError;
     }
 
 
     public static function destroy($id)
     {
+        try {
+            $movie = Movie::findOrFail($id);
 
-        $room = Movie::findOrFail($id);
-
-        $room->delete();
+            $movie->delete();
+        } catch (\PDOException) {
+            return back()->with('msg-error', 'Filme vinculado a uma sessão');
+        }
     }
 }

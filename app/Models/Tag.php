@@ -13,6 +13,7 @@ class Tag extends Model
 
     protected $fillable = ['name'];
 
+    
     public function movies()
     {
         return $this->hasOne(Movie::class);
@@ -26,29 +27,34 @@ class Tag extends Model
 
     public static function store(ValidateTagsFormCreate $request)
     {
-        if (CheckExistingItems::tags($request)) {
-            return back()->with('msg-error', 'Gênero já existente');
-        };
+        $messageError = CheckExistingItems::tags($request);
 
-        $tags = new Tag;
+        if ($messageError == false) {
 
-        $tags->name = $request->name;
+            $tags = new Tag;
 
-        $tags->save();
+            $tags->name = $request->name;
+
+            $tags->save();
+        }
+        return $messageError;
     }
 
 
     public static function alter(ValidateTagsFormCreate $request, $id)
     {
-        if (CheckExistingItems::tags($request)) {
-            return back()->with('msg-error', 'Gênero já existente');
-        };
+        $messageError = CheckExistingItems::tags($request);
 
-        $data = [
-            'name' => $request->name
-        ];
+        if ($messageError == false) {
 
-        Tag::where('id', $id)->update($data);
+            $data = [
+                'name' => $request->name
+            ];
+
+            Tag::where('id', $id)->update($data);
+        }
+        return $messageError;  
+
     }
 
 

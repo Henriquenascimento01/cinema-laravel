@@ -42,13 +42,10 @@ class Session extends Model
 
     public static function store(ValidateFormSessionCreate $request)
     {
-        //dd(RoomsWithSessionsOrdered::get()); 
 
-        $messageError = ValidationServices::validAll($request);
+        $messsageError = ValidationServices::validAll($request);
 
-       // dd($messageError); 
-
-        if ($messageError === false) {
+        if ($messsageError == false) {
 
             $sessions = new Session;
 
@@ -58,29 +55,34 @@ class Session extends Model
             $sessions->room_id = $request->room_id;
             $sessions->movie_id = $request->movie_id;
 
+
             $sessions->save();
-        }   return $messageError; 
+        }
+        return $messsageError;
     }
 
 
     public static function alter(ValidateFormSessionCreate $request, $id)
     {
 
+        $messsageError = ValidationServices::validAll($request);
 
-        if (ValidationServices::validAll($request)) {
-            return redirect('/sessions/create');
+        if ($messsageError == false) {
+            // if (ValidationServices::validAll($request)) {
+            //     return redirect('/sessions/create');
+            // }
+            $data = [
+                'date' => $request->date,
+                'time_initial' => $request->time_initial,
+                'time_finish' => $request->time_finish,
+                'movie_id' => $request->movie_id,
+                'room_id' => $request->room_id,
+
+
+            ];
+
+            Session::where('id', $id)->update($data);
         }
-
-
-        $data = [
-            'date' => $request->date,
-            'time_initial' => $request->time_initial,
-            'time_finish' => $request->time_finish,
-            'movie_id' => $request->movie_id,
-            'room_id' => $request->room_id,
-
-        ];
-
-        Session::where('id', $id)->update($data);
+        return $messsageError; 
     }
 }

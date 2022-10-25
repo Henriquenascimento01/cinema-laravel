@@ -15,6 +15,11 @@
             </div>
         </div>
     </main>
+    @if (session('msg-error'))
+        <div class="alert alert-danger">
+            {{ session('msg-error') }}
+        </div>
+    @endif
     <table class="table mt-5">
         <thead>
             <tr class="rooms-index-title">

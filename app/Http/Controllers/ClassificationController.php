@@ -19,12 +19,17 @@ class ClassificationController extends Controller
         return view('classifications.create');
     }
 
+
     public function store(ValidateClassificationFormCreate $request)
     {
-        Classification::store($request);
+        $response = Classification::store($request);
 
+        if ($response) {
+            return back()->with('msg-error', 'Classificação já existente');
+        }
         return redirect('/classifications');
     }
+
 
     public function edit($id)
     {
@@ -40,16 +45,27 @@ class ClassificationController extends Controller
         }
     }
 
+
+
     public function update(ValidateClassificationFormCreate $request, $id)
     {
-        try {
-            Classification::alter($request, $id);
 
-            return redirect('/classifications');
-        } catch (\PDOException) {
-            return back()->with('msg-error', 'Erro ao atualiza classificação');
+        $response = Classification::alter($request, $id);
+
+        if ($response) {
+            return back()->with('msg-error', 'Classificação já cadastrada');
         }
+        return redirect('/classifications');
+        // try {
+        //     Classification::alter($request, $id);
+
+        //     return redirect('/classifications');
+        // } catch (\PDOException) {
+        //     return back()->with('msg-error', 'Erro ao atualiza classificação');
+        // }
     }
+
+
 
     public function destroy($id)
     {

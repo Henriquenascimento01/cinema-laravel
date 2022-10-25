@@ -81,7 +81,22 @@
         <div class="container-fluid">
             <div class="mt-5">
 
-                
+                {{-- @if (session('msg-error'))
+                    <div class="alert alert-danger">
+                        {{ session('msg-error') }}
+                    </div>
+                @endif --}}
+
+                {{-- @if ($errors->any())
+                    <ul class="error">
+                        @foreach ($errors->all() as $error)
+                            <li class="alert alert-danger">
+                                {{ $error }}
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif --}}
+
                 @yield('content')
 
             </div>

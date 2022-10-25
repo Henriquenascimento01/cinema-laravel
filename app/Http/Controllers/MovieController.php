@@ -32,14 +32,12 @@ class MovieController extends Controller
 
     public function store(ValidateFormMoviesCreate $request)
     {
-        try {
-            Movie::store($request);
+        $response = Movie::store($request);
 
-            return redirect('/movies')->with('msg-sucess', 'Filme cadastrado com sucesso!');
-        } catch (\PDOException $e) {
+        if ($response) {
 
-            return back()->with('msg-error', "Algo inesperado ocorreu");
-        }
+            return back()->with('msg-error', 'Filme já cadastrado');
+        } else return redirect('/movies');
     }
 
     public function edit($id)
@@ -47,6 +45,16 @@ class MovieController extends Controller
         $movies = Movie::where('id', $id)->first();
 
         if (!empty($movies)) {
+
+            $tags = Tag::all();
+            $classifications = Classification::all();
+
+            return view('movies.edit', [
+                'classifications' => $classifications,
+                'tags' => $tags,
+                'movies' => $movies
+            ]);
+
             return view('movies.edit', ['movies' => $movies]);
         } else {
             return redirect()->route('index');
@@ -55,13 +63,12 @@ class MovieController extends Controller
 
     public function update(ValidateFormMoviesCreate $request, $id)
     {
-        try {
-            Movie::alter($request, $id);
+        $response = Movie::alter($request, $id);
+        
 
-            return redirect('/movies')->with('msg-sucess', 'Filme alterado com sucesso!');
-        } catch (\PDOException) {
-            return back()->with('msg-error', "Algo inesperado ocorreu");
-        }
+        if ($response) {
+            return back()->with('msg-error', 'Filme já cadastrado');
+        } else return redirect('/movies');
     }
 
     public function destroy($id)

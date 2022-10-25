@@ -16,7 +16,7 @@
         @endif
 
 
-        @if ($errors->any())
+        {{-- @if ($errors->any())
             <ul class="error">
                 @foreach ($errors->all() as $error)
                     <li class="alert alert-danger">
@@ -24,7 +24,7 @@
                     </li>
                 @endforeach
             </ul>
-        @endif
+        @endif --}}
         <form action="{{ route('sessions-store') }}" method="POST">
             @csrf
 

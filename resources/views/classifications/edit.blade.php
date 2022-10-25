@@ -10,9 +10,9 @@
 
     <div id="movie-create-container" class="col-md-4 offset-md-3">
         <h1>Editar classificação</h1>
-        @if (session('danger'))
+        @if (session('msg-error'))
             <div class="alert alert-danger">
-                {{ session('danger') }}
+                {{ session('msg-error') }}
             </div>
         @endif
         <form action="{{ route('classifications-update', ['id' => $classifications->id]) }}" method="POST">
@@ -29,7 +29,8 @@
             @endif
             <div class="form-group">
                 <label for="text">Sala de transmissão:</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ $classifications->name }}">
+                <input type="text" class="form-control" id="name" name="name"
+                    value="{{ $classifications->name }}">
             </div>
 
             <input type="submit" class="btn btn-success" value="Editar">

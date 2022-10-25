@@ -25,6 +25,7 @@
                     <img src="/img/movies/{{ $session->image }}">
 
                     <div class="card-body">
+                        <p>{{ $session->id }}</p>
                         <p class="card-date">{{ \Carbon\Carbon::parse($session['date'])->format('d/m/Y') }}</p>
                         <h5 class="card-title">{{ $session->movie->name }}</h5>
                         <p class="card-duration">Inicio:

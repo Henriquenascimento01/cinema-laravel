@@ -37,22 +37,14 @@ class SessionController extends Controller
     }
 
 
-
     public function store(ValidateFormSessionCreate $request)
     {
-
-
-        if ($request->room_id == "room_id" || $request->movie_id == "movie_id") {
-            return back()->with('msg-error', 'Campos ID da sala e filme são obrigatórios');
-        }
-
         $response = Session::store($request);
 
         if ($response) {
+
             return back()->with('msg-error', $response);
-        } else {
-            return redirect('/')->with('msg-sucess', 'Sessão criada com sucesso!');
-        }
+        } else return redirect('/');
     }
 
 
@@ -72,27 +64,21 @@ class SessionController extends Controller
                 'rooms' => $rooms,
                 'movies' => $movies
             ]);
-        } else {
-
-            return redirect()->route('index');
-        }
+        } else return redirect()->route('index');
     }
+
 
     public function update(ValidateFormSessionCreate $request, $id)
     {
-        if ($request->room_id == "room_id" || $request->movie_id == "movie_id") {
 
-            return back()->with('msg-error', 'Campos ID da sala e filme são obrigatórios');
+        $response = Session::alter($request, $id);
+
+        if ($response) {
+            return back()->with('msg-error', $response);
         }
-
-        try {
-            Session::alter($request, $id);
-            return redirect('/')->with('msg-sucess', 'Sessão alterada com sucesso');
-        } catch (\PDOException) {
-
-            return back()->with('msg-error', 'Ops algo inesperado ocorreu');
-        }
+        return redirect('/')->with('msg-sucess', 'Sessão alterada com sucesso');
     }
+
 
     public function destroy($id)
     {

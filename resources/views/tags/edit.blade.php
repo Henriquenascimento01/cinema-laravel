@@ -10,9 +10,9 @@
 
     <div id="movie-create-container" class="col-md-4 offset-md-3">
         <h1>Editar gênero</h1>
-        @if (session('danger'))
+        @if (session('msg-error'))
             <div class="alert alert-danger">
-                {{ session('danger') }}
+                {{ session('msg-error') }}
             </div>
         @endif
         <form action="{{ route('tags-update', ['id' => $tags->id]) }}" method="POST">

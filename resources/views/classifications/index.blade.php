@@ -16,7 +16,11 @@
         </div>
     </main>
     <table class="table mt-5">
-
+        @if (session('msg-error'))
+            <div class="alert alert-danger">
+                {{ session('msg-error') }}
+            </div>
+        @endif
         <thead>
             <tr class="rooms-index-title">
                 <th scope="col">Titulo</th>

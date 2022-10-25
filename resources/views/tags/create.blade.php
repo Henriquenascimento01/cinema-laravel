@@ -9,6 +9,11 @@
     <div id="movie-create-container" class="col-md-4 offset-md-3">
         <h1>Criar gênero</h1>
 
+        @if (session('msg-error'))
+            <div class="alert alert-danger">
+                {{ session('msg-error') }}
+            </div>
+        @endif
         <form action="{{ route('tags-store') }}" method="POST">
             @csrf
             @if ($errors->any())

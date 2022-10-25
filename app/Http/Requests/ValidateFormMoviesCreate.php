@@ -30,7 +30,7 @@ class ValidateFormMoviesCreate extends FormRequest
             'classification_id' => 'required',
             'tag_id' => 'required',
             'image' => 'required',
-            'duration' => 'required'
+            
         ];
     }
 
@@ -42,7 +42,6 @@ class ValidateFormMoviesCreate extends FormRequest
             'tag_id' => 'O gênero é obrigatório',
             'classification_id' => 'A classificação é obrigatória.',
             'image' => 'A imagem é obrigatória.',
-            'duration' => 'Tempo de duração é obrigatório',
         ];
     }
 }

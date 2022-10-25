@@ -20,9 +20,9 @@
                     @endforeach
                 </ul>
             @endif
-            @if (session('msg'))
+            @if (session('msg-error'))
                 <div class="alert alert-danger">
-                    {{ session('msg') }}
+                    {{ session('msg-error') }}
                 </div>
             @endif
 

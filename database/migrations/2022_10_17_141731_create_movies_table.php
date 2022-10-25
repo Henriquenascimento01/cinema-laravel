@@ -18,7 +18,6 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->text('description');
-            $table->time('duration');
             $table->string('image');
             $table->foreignId('classification_id')->nullable()->constrained('classifications');
             $table->foreignId('tag_id')->nullable()->constrained('tags');

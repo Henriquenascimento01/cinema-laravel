@@ -26,31 +26,34 @@ class Classification extends Model
 
     public static function store(ValidateClassificationFormCreate $request)
     {
+        $messageError = CheckExistingItems::classifications($request);
 
-        if (CheckExistingItems::classifications($request)) {
-            return redirect('classifications/create')->with('msg-error', 'Classificação já existente');
-        };
+        if ($messageError == false) {
 
-        $classifications = new Classification;
+            $classifications = new Classification;
 
-        $classifications->name = $request->name;
+            $classifications->name = $request->name;
 
-        $classifications->save();
+            $classifications->save();
+        }
+        return $messageError;
     }
 
 
     public static function alter(ValidateClassificationFormCreate $request, $id)
     {
-        if (CheckExistingItems::classifications($request)) {
-            return redirect('classifications/create')->with('msg-error', 'Classificação já existente');
-        };
+        $messageError = CheckExistingItems::classifications($request);
+
+        if ($messageError == false) {
 
 
-        $data = [
-            'name' => $request->name
-        ];
+            $data = [
+                'name' => $request->name
+            ];
 
-        Classification::where('id', $id)->update($data);
+            Classification::where('id', $id)->update($data);
+        }
+        return $messageError;
     }
 
 

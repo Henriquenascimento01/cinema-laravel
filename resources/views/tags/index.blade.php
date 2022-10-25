@@ -15,6 +15,11 @@
             </div>
         </div>
     </main>
+    @if (session('msg-error'))
+        <div class="alert alert-danger">
+            {{ session('msg-error') }}
+        </div>
+    @endif
     <table class="table mt-5">
 
         <thead>
@@ -27,10 +32,8 @@
                 <tr class="rooms-index-list">
                     <th scope="row">{{ $tag->name }}</th>
                     <td>
-                        <a href="{{ route('tags-edit', ['id' => $tag->id]) }}"
-                            class="btn btn-warning">Editar</a>
-                        <form action="{{ route('tags-destroy', ['id' => $tag->id]) }}" method="POST"
-                            class="form-group">
+                        <a href="{{ route('tags-edit', ['id' => $tag->id]) }}" class="btn btn-warning">Editar</a>
+                        <form action="{{ route('tags-destroy', ['id' => $tag->id]) }}" method="POST" class="form-group">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger mt-2">Apagar</button>
