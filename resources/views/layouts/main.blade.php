@@ -39,7 +39,6 @@
                         <li class="nav-item">
                             <a href="{{ route('login-form') }}" class="nav-link">Entrar</a>
                         </li>
-
                     @endguest
 
                     @auth

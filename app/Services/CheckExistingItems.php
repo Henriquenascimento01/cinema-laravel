@@ -90,6 +90,7 @@ class CheckExistingItems
 
         $movies = Movie::all();
 
+
         foreach ($movies as $movie) {
 
             if (Str::lower($request->name) == Str::lower($movie->name)) {
