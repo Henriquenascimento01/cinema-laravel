@@ -4,14 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-use Illuminate\Http\Request;
-use App\Services\RoomsValidate;
-use App\Services\ValidatePastSessionDate;
-use App\Services\ValidateCineOpened;
+
 use App\Http\Requests\ValidateFormSessionCreate;
-use App\Services\RoomsWithSessionsOrdered;
 use Illuminate\Database\Eloquent\Model;
-use App\Services\ValidateSessionDate;
 use App\Services\ValidationServices;
 
 class Session extends Model

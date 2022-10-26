@@ -2,10 +2,7 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request;
-use App\Models\Movie;
 use App\Models\Session;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 
 class Search

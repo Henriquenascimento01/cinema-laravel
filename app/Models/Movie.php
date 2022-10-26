@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use App\Http\Requests\FormEditMovies;
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Requests\ValidateFormMoviesCreate;
 use App\Services\CheckExistingItems;
-use App\Services\ValidationMovie;
+
 
 class Movie extends Model
 {
