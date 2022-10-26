@@ -24,7 +24,7 @@ class ValidateFormRoomsCreate extends FormRequest
     public function rules()
     {
         return [
-            'number' => 'required'
+            'number' => 'required|numeric'
         ];
     }
 

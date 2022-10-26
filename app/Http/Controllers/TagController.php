@@ -26,7 +26,7 @@ class TagController extends Controller
 
         if ($response) {
 
-            return back()->with('msg-error', 'Gênero já cadastrado');
+            return back()->withInput()->with('msg-error', 'Gênero já cadastrado');
         } else return redirect('/tags');
     }
 
@@ -50,7 +50,7 @@ class TagController extends Controller
         $response = Tag::alter($request, $id);
 
         if ($response) {
-            return back()->with('msg-error', 'Gênero já cadastrado');
+            return back()->withInput()->with('msg-error', 'Gênero já cadastrado');
         }
 
         return redirect('/tags');

@@ -22,20 +22,14 @@ class CheckExistingItems
 
         $classifications = Classification::getAll();
 
+        foreach ($classifications as $classification) {
 
-        if ($request->_method == "PUT") {
-
-            foreach ($classifications as $classification) {
+            if ($request->_method == "PUT") {
 
                 if (Str::lower($request->name) == Str::lower($classification->name)) {
                     return true;
                 }
-                return false;
             }
-        }
-
-
-        foreach ($classifications as $classification) {
 
             if (Str::lower($request->name) == Str::lower($classification->name)) {
 
@@ -49,19 +43,15 @@ class CheckExistingItems
     {
         $tags = Tag::getAll();
 
-        if ($request->_method == "PUT") {
 
-            foreach ($tags as $tag) {
+        foreach ($tags as $tag) {
+
+            if ($request->_method == "PUT") {
 
                 if (Str::lower($request->name) == Str::lower($tag->name)) {
                     return true;
                 }
-                return false;
             }
-        }
-
-
-        foreach ($tags as $tag) {
 
             if (Str::lower($request->name) == Str::lower($tag->name)) {
 
@@ -77,21 +67,17 @@ class CheckExistingItems
 
         $rooms = Room::getAll();
 
-        if ($request->_method == "PUT") {
-
-            foreach ($rooms as $room) {
-
-                if (Str::lower($request->number) == Str::lower($room->number)) {
-                    return true;
-                }
-                return false;
-            }
-        }
-
 
         foreach ($rooms as $room) {
 
-            if (Str::lower($request->name) == Str::lower($room->name)) {
+            if ($request->_method == "PUT") {
+
+                if ($request->number == $room->number) {
+                    return true;
+                }
+            }
+
+            if ($request->number == $room->number) {
 
                 return true;
             }
@@ -103,17 +89,6 @@ class CheckExistingItems
     {
 
         $movies = Movie::all();
-
-        if ($request->_method == "PUT") {
-
-            foreach ($movies as $movie) {
-
-                if (Str::lower($request->name) == Str::lower($movie->name)) {
-                    return true;
-                }
-                return false;
-            }
-        }
 
         foreach ($movies as $movie) {
 

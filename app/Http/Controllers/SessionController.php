@@ -39,6 +39,7 @@ class SessionController extends Controller
 
     public function store(ValidateFormSessionCreate $request)
     {
+        //dd($request); 
         $response = Session::store($request);
 
         if ($response) {

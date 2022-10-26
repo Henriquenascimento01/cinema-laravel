@@ -24,7 +24,7 @@ class ValidateFormSessionCreate extends FormRequest
     public function rules()
     {
         return [
-            'date' => 'required',
+            'date' => 'required|date',
             'time_initial' => 'required',
             'time_finish' => 'required',
             'room_id' => 'required',
