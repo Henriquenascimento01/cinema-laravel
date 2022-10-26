@@ -39,7 +39,7 @@
 
             <div class="form-group">
                 <label for="image">Banner:</label>
-                <input type="file" class="form-control-file" id="image" name="image">
+                <input type="file" class="form-control-file" id="image" name="image" required>
             </div>
 
             <div class="form-group">
@@ -47,7 +47,8 @@
                 <select name="tag_id" id="tag_id" class="form-control">
                     <option selected="disabled" name="tag_id" value="{{ old('tag_id') }}">Selecione</option>
                     @foreach ($tags as $tag)
-                        <option name="tag_id" value="{{ $tag->id }}"> {{ $tag->name }}</option>
+                        <option name="tag_id" @if (old('tag_id') == $tag->id) {{ 'selected="selected"' }} @endif
+                            value="{{ $tag->id }}"> {{ $tag->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -58,7 +59,9 @@
                     <option selected="disabled" name="classification_id" value="{{ old('classification_id') }}">Selecione
                     </option>
                     @foreach ($classifications as $classification)
-                        <option name="classification_id" value="{{ $classification->id }}"> {{ $classification->name }}
+                        <option name="classification_id"
+                            @if (old('classification_id') == $classification->id) {{ 'selected="selected"' }} @endif
+                            value="{{ $classification->id }}"> {{ $classification->name }}
                         </option>
                     @endforeach
                 </select>

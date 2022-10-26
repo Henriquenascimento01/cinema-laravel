@@ -68,9 +68,7 @@ class Session extends Model
         $messsageError = ValidationServices::validAll($request);
 
         if ($messsageError == false) {
-            // if (ValidationServices::validAll($request)) {
-            //     return redirect('/sessions/create');
-            // }
+
             $data = [
                 'date' => $request->date,
                 'time_initial' => $request->time_initial,
@@ -83,6 +81,6 @@ class Session extends Model
 
             Session::where('id', $id)->update($data);
         }
-        return $messsageError; 
+        return $messsageError;
     }
 }

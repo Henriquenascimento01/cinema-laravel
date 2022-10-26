@@ -34,8 +34,10 @@
 
             <div class="form-group">
                 <label for="image">Banner:</label>
-                <input type="file" class="form-control-file" id="image" name="image" value="{{ $movies->image }}">
+                <input type="file" class="form-control-file" id="image" name="image">
+                <img src="/img/movies/{{$movies->image }}" alt="" class="img-preview">
             </div>
+
 
             <div class="form-group">
                 <label for="tag_id">Gênero:</label>

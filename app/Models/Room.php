@@ -33,32 +33,34 @@ class Room extends Model
 
     public static function store(ValidateFormRoomsCreate $request)
     {
-        if (CheckExistingItems::rooms($request)) {
 
-            return back()->with('msg-error', 'Sala já existente');
-        };
+        $messageError = CheckExistingItems::rooms($request);
 
-        $rooms = new Room;
+        if ($messageError == false) {
 
-        $rooms->number = $request->number;
+            $rooms = new Room;
 
-        $rooms->save();
+            $rooms->number = $request->number;
+
+            $rooms->save();
+        }
+        return $messageError;
     }
 
 
     public static function alter(ValidateFormRoomsCreate $request, $id)
     {
-        if (CheckExistingItems::rooms($request)) {
+        $messageError = CheckExistingItems::rooms($request);
 
-            return back()->with('msg-error', 'Sala já existente');
-        };
+        if ($messageError == false) {
 
+            $data = [
+                'number' => $request->number
+            ];
 
-        $data = [
-            'number' => $request->number
-        ];
-
-        Room::where('id', $id)->update($data);
+            Room::where('id', $id)->update($data);
+        }
+        return $messageError;
     }
 
 

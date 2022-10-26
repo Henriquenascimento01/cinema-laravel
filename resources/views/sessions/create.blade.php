@@ -16,7 +16,7 @@
         @endif
 
 
-        {{-- @if ($errors->any())
+        @if ($errors->any())
             <ul class="error">
                 @foreach ($errors->all() as $error)
                     <li class="alert alert-danger">
@@ -24,7 +24,7 @@
                     </li>
                 @endforeach
             </ul>
-        @endif --}}
+        @endif
         <form action="{{ route('sessions-store') }}" method="POST">
             @csrf
 
@@ -49,7 +49,8 @@
                 <select name="room_id" id="room_id" class="form-control">
                     <option selected="disabled" name="room_id" value="{{ old('room_id') }}">Selecione</option>
                     @foreach ($rooms as $room)
-                        <option name="room_number" value="{{ $room->id }}"> {{ $room->number }}</option>
+                        <option name="room_number" @if (old('room_id') == $room->id) {{ 'selected="selected"' }} @endif
+                            value="{{ $room->id }}"> {{ $room->number }}</option>
                     @endforeach
                 </select>
             </div>
@@ -60,7 +61,8 @@
                 <select name="movie_id" id="movie_id" class="form-control">
                     <option selected="disabled" name="movie_id" value="{{ old('movie_id') }}">Selecione</option>
                     @foreach ($movies as $movie)
-                        <option name="movie_id" value="{{ $movie->id }}">{{ $movie->name }}</option>
+                        <option name="movie_id" @if (old('movie_id') == $movie->id) {{ 'selected="selected"' }} @endif
+                            value="{{ $movie->id }}">{{ $movie->name }}</option>
                     @endforeach
                 </select>
             </div>

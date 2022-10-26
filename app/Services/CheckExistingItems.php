@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\FormEditMovies;
 use App\Http\Requests\ValidateClassificationFormCreate;
 use App\Http\Requests\ValidateFormMoviesCreate;
 use App\Http\Requests\ValidateFormRoomsCreate;
@@ -41,7 +42,6 @@ class CheckExistingItems
                 return true;
             }
         }
-
         return false;
     }
 
@@ -116,6 +116,25 @@ class CheckExistingItems
         }
 
         foreach ($movies as $movie) {
+
+            if (Str::lower($request->name) == Str::lower($movie->name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public static function moviesUpdate(FormEditMovies $request)
+    {
+        //dd($request);
+        $movies = Movie::get();
+
+        foreach ($movies as $movie) {
+
+            if (Str::lower($request->name) == Str::lower($movie->name) && $request->tag_id == $movie->tag_id && $request->classification_id == $movie->classification_id && $request->description == $movie->description) {
+                return false;
+            }
 
             if (Str::lower($request->name) == Str::lower($movie->name)) {
                 return true;

@@ -43,7 +43,7 @@ class SessionController extends Controller
 
         if ($response) {
 
-            return back()->with('msg-error', $response);
+            return back()->withInput()->with('msg-error', $response);
         } else return redirect('/');
     }
 
@@ -74,7 +74,7 @@ class SessionController extends Controller
         $response = Session::alter($request, $id);
 
         if ($response) {
-            return back()->with('msg-error', $response);
+            return back()->withInput()->with('msg-error', $response);
         }
         return redirect('/')->with('msg-sucess', 'Sessão alterada com sucesso');
     }

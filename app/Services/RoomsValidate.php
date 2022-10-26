@@ -38,6 +38,15 @@ class RoomsValidate
 
         foreach ($registredSessions as $session) {
 
+            // da linha 43 até 48 se trata de uma solução paliativa para que não caia na validação de sala em uso 
+            //caso o formulário seja submetido sem alterar nenhum dado
+            if ($request->_method == 'PUT') {
+
+                if ($request->date == $session['date'] && $request->time_initial == $session['time_initial'] && $request->time_finish == $session['time_finish'] && $request->room_id == $session['room_id'] || $request->movie_id == $session['movie_id']) {
+                    return false;
+                }
+            }
+
             if ($sessionInit == $session['time_initial'] && $sessionFinish == $session['time_finish']) {
 
                 return true;

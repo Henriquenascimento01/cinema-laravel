@@ -20,6 +20,7 @@
             {{ session('msg-error') }}
         </div>
     @endif
+    
     <table class="table mt-5">
         <thead>
             <tr class="rooms-index-title">

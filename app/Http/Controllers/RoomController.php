@@ -24,26 +24,13 @@ class RoomController extends Controller
 
     public function store(ValidateFormRoomsCreate $request)
     {
+        $response = Room::store($request);
 
-        try {
-            Room::store($request);
-
-            return redirect('/rooms')->with('msg-sucess', 'Sala criada com sucesso!');
-        } catch (\PDOException $e) {
-
-            if ($e->getCode() == 23000) {
-
-                return back()->with('msg-error', 'A sala já existe');
-            }
-            if ($e->getCode() == "HY000") {
-
-                return back()->with('msg-error', 'Por favor insira somente números');
-            } else {
-
-                return back()->with('msg-error', 'Erro ao criar a sala');
-            }
-        }
+        if ($response) {
+            return back()->withInput()->with('msg-error', 'Sala já cadastrada');
+        } else return redirect('/rooms');
     }
+
 
     public function edit($id)
     {
@@ -61,25 +48,15 @@ class RoomController extends Controller
 
     public function update(ValidateFormRoomsCreate $request, $id)
     {
-        try {
-            Room::alter($request, $id);
 
-            return redirect('/rooms')->with('msg-sucess', 'Sala alterada com sucesso');
-        } catch (\PDOException $e) {
+        $response = Room::alter($request, $id);
 
-            if ($e->getCode() == 23000) {
-
-                return back()->with('msg-error', 'A sala já existe');
-            }
-            if ($e->getCode() == "HY000") {
-
-                return back()->with('msg-error', 'Por favor insira somente números');
-            } else {
-
-                return back()->with('msg-error', 'Erro ao atualizar a sala');
-            }
+        if ($response) {
+            return back()->withInput()->with('msg-error', 'Sala já cadastrada');
         }
+        return redirect('/rooms');
     }
+
 
     public function destroy($id)
     {

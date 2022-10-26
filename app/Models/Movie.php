@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Http\Requests\FormEditMovies;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Requests\ValidateFormMoviesCreate;
 use App\Services\CheckExistingItems;
-use App\Services\ExistingMovies;
+use App\Services\ValidationMovie;
 
 class Movie extends Model
 {
@@ -42,13 +43,12 @@ class Movie extends Model
 
     public static function getAll()
     {
-        // dd(Movie::all());
         return Movie::all();
     }
 
 
     public static function store(ValidateFormMoviesCreate $request)
-    {  
+    {
         $messageError = CheckExistingItems::movies($request);
 
         if ($messageError == false) {
@@ -80,10 +80,9 @@ class Movie extends Model
 
 
 
-    public static function alter(ValidateFormMoviesCreate $request, $id)
+    public static function alter(FormEditMovies $request, $id)
     {
-
-        $messageError = CheckExistingItems::movies($request);
+        $messageError = CheckExistingItems::moviesUpdate($request);
 
         if ($messageError == false) {
 
@@ -116,12 +115,9 @@ class Movie extends Model
 
     public static function destroy($id)
     {
-        try {
-            $movie = Movie::findOrFail($id);
 
-            $movie->delete();
-        } catch (\PDOException) {
-            return back()->with('msg-error', 'Filme vinculado a uma sessão');
-        }
+        $movie = Movie::findOrFail($id);
+
+        $movie->delete();
     }
 }

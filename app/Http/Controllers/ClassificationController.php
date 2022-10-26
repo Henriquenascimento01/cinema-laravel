@@ -25,7 +25,7 @@ class ClassificationController extends Controller
         $response = Classification::store($request);
 
         if ($response) {
-            return back()->with('msg-error', 'Classificação já existente');
+            return back()->withInput()->with('msg-error', 'Classificação já existente');
         }
         return redirect('/classifications');
     }
@@ -53,16 +53,9 @@ class ClassificationController extends Controller
         $response = Classification::alter($request, $id);
 
         if ($response) {
-            return back()->with('msg-error', 'Classificação já cadastrada');
+            return back()->withInput()->with('msg-error', 'Classificação já cadastrada');
         }
         return redirect('/classifications');
-        // try {
-        //     Classification::alter($request, $id);
-
-        //     return redirect('/classifications');
-        // } catch (\PDOException) {
-        //     return back()->with('msg-error', 'Erro ao atualiza classificação');
-        // }
     }
 
 

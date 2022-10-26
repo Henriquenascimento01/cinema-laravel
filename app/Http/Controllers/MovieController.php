@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormEditMovies;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Http\Requests\ValidateFormMoviesCreate;
@@ -36,7 +37,7 @@ class MovieController extends Controller
 
         if ($response) {
 
-            return back()->with('msg-error', 'Filme já cadastrado');
+            return back()->withInput()->with('msg-error', 'Filme já cadastrado');
         } else return redirect('/movies');
     }
 
@@ -61,15 +62,18 @@ class MovieController extends Controller
         }
     }
 
-    public function update(ValidateFormMoviesCreate $request, $id)
-    {
-        $response = Movie::alter($request, $id);
+
+    public function update(FormEditMovies $request, $id)
+    {   
         
+        $response = Movie::alter($request, $id);
+
 
         if ($response) {
-            return back()->with('msg-error', 'Filme já cadastrado');
+            return back()->withInput()->with('msg-error', 'Filme já cadastrado');
         } else return redirect('/movies');
     }
+
 
     public function destroy($id)
     {
