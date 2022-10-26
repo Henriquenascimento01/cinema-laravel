@@ -32,4 +32,4 @@ Para poder utilizar o CRUD completo será necessário criar um novo login de adm
 `INSERT INTO users (name, email, password) VALUES ('nomeusuario','emailusuario', 'senha em hash')`
 
 
-Obs. para validar será necessário que a senha a ser inserida no banco esteja convertida em hash, para gerar uma chave pela aplicação, ao final da view homepage está comentado um HashMaker, você pode descomentar e incluir dentro da função make uma string com a senha desejada, e após salvar e atualizar a página inicial, no topo será exibido a senha em hash.
+Obs. para validar será necessário que a senha a ser inserida no banco esteja convertida em hash, no arquivo `AuthenticationController.php` possui um comando comentado `//dd(Hash::make('sua senha'));` onde poderá verificar qual é o hash gerado a partir da senha que queira incluir. Uma vez pego o hash basta inserir no banco utilizando o comando acima e terá acesso a aplicação. 

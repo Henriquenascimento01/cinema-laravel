@@ -21,7 +21,7 @@ class AuthenticationController extends Controller
             'password' => ['required']
         ]);
 
-        //dd(Hash::make('12345678'));
+        //dd(Hash::make('sua senha'));
         if (Auth::attempt($dados)) {
 
 
