@@ -127,7 +127,6 @@ class CheckExistingItems
 
     public static function moviesUpdate(FormEditMovies $request)
     {
-        //dd($request);
         $movies = Movie::get();
 
         foreach ($movies as $movie) {

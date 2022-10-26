@@ -26,6 +26,7 @@
                         <h5 class="card-title">Titulo: {{ $movie->name }}</h5>
                         <p class="card-duration">Classificação: {{ $movie->classification->name }}</p>
                         <p class="card-duration">Gênero: {{ $movie->tag->name }}</p>
+                       
                         <a href="{{ route('movies-edit', ['id' => $movie->id]) }}" class="btn btn-warning">Editar</a>
 
                         <form action="{{ route('movies-destroy', ['id' => $movie->id]) }}" method="POST"
